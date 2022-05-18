@@ -1,0 +1,12 @@
+*.egg-info
+.DS_Store
+.coverage
+.mypy_cache
+.nox
+.tox
+.venv
+__pycache__
+coverage.xml
+docs/_build
+poetry.lock
+tags
