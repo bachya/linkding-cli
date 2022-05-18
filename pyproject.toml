@@ -1,0 +1,106 @@
+[build-system]
+requires = ["setuptools >= 35.0.2", "wheel >= 0.29.0", "poetry>=0.12"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.report]
+exclude_lines = ["raise NotImplementedError", "TYPE_CHECKING"]
+fail_under = 100
+
+[tool.coverage.run]
+source = ["package_name"]
+
+[tool.isort]
+combine_as_imports = true
+default_section = "THIRDPARTY"
+force_grid_wrap = 0
+force_sort_within_sections = true
+forced_separate = "tests"
+include_trailing_comma = true
+indent = "    "
+known_first_party = "package_name,examples,tests"
+line_length = 88
+multi_line_output = 3
+not_skip = "__init__.py"
+sections = "FUTURE,STDLIB,INBETWEENS,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
+use_parentheses = true
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_decorators = true
+disallow_untyped_defs = true
+follow_imports = "silent"
+ignore_missing_imports = true
+no_implicit_optional = true
+python_version = "3.8"
+show_error_codes = true
+strict_equality = true
+warn_incomplete_stub = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[tool.poetry]
+name = "package_name"
+version = "0.0.1"
+description = "DESCRIPTION GOES HERE"
+readme = "README.md"
+authors = ["Aaron Bach <bachya1208@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/bachya/package_name"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+
+[tool.poetry.dependencies]
+aiohttp = ">=3.8.0"
+python = "^3.8.0"
+
+[tool.poetry.dev-dependencies]
+aresponses = "^2.0.0"
+nox = "^2022.1.7"
+pre-commit = "^2.0.1"
+pytest = "^7.0.0"
+pytest-aiohttp = "^1.0.0"
+pytest-cov = "^3.0.0"
+
+[tool.pylint.BASIC]
+expected-line-ending-format = "LF"
+
+[tool.pylint."MESSAGES CONTROL"]
+# Reasons disabled:
+# bad-continuation - Invalid attack on black
+# unnecessary-pass - This can hurt readability
+disable = [
+  "bad-continuation",
+  "unnecessary-pass"
+]
+
+[tool.pylint.REPORTS]
+score = false
+
+[tool.pylint.SIMILARITIES]
+# Minimum lines number of a similarity.
+# We set this higher because of some cases where V2 and V3 functionality are
+# similar, but abstracting them isn't feasible.
+min-similarity-lines = 4
+
+# Ignore comments when computing similarities.
+ignore-comments = true
+
+# Ignore docstrings when computing similarities.
+ignore-docstrings = true
+
+# Ignore imports when computing similarities.
+ignore-imports = true

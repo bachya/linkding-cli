@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+set -e
+
+REPO_PATH="$( dirname "$( cd "$(dirname "$0")" ; pwd -P )" )"
+
+if [ "$(git rev-parse --abbrev-ref HEAD)" != "dev" ]; then
+    echo "Refusing to publish a release from a branch other than dev"
+    exit 1
+fi
+
+if [ -z "$(command -v poetry)" ]; then
+    echo "Poetry needs to be installed to run this script: pip3 install poetry"
+    exit 1
+fi
+
+function generate_version {
+    latest_tag="$(git tag --sort=committerdate | tail -1)"
+    month="$(date +'%Y.%m')"
+
+    if [[ "$latest_tag" =~ "$month".* ]]; then
+        patch="$(echo "$latest_tag" | cut -d . -f 3)"
+        ((patch=patch+1))
+        echo "$month.$patch"
+    else
+        echo "$month.0"
+    fi
+}
+
+# Temporarily uninstall pre-commit hooks so that we can push to dev and master:
+pre-commit uninstall
+
+# Pull the latest dev:
+git pull origin dev
+
+# Generate the next version (in the format YEAR.MONTH.RELEASE_NUMER):
+new_version=$(generate_version)
+
+# Update the PyPI package version:
+sed -i "" "s/^version = \".*\"/version = \"$new_version\"/g" "$REPO_PATH/pyproject.toml"
+git add pyproject.toml
+
+# Commit, tag, and push:
+git commit -m "Bump version to $new_version"
+git tag "$new_version"
+git push && git push --tags
+
+# Merge dev into master:
+git checkout master
+git merge dev
+git push
+git checkout dev
+
+# Re-initialize pre-commit:
+pre-commit install
