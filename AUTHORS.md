@@ -1,4 +1,4 @@
-# Contributions to `package_name`
+# Contributions to `linkding-cli`
 
 ## Owners
 
