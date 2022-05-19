@@ -34,10 +34,10 @@ pip install linkding-cli
 
 # Usage
 
-Usage instructions are provided via the `--help` option (either on the mn `linkding`
+Usage instructions are provided via the `--help` option (either on the main `linkding`
 executable or on any of its commands):
 
-```sh
+```
 $ linkding --help
 Usage: linkding [OPTIONS] COMMAND [ARGS]...
 
@@ -68,19 +68,19 @@ These can be provided in multiple ways.
 
 ### CLI Options
 
-```sh
+```
 $ linkding -u http://127.0.0.1:8000 -t abcde12345 ...
 ```
 
 ### Environment Variables
 
-```sh
+``
 $ LINKDING_URL=http://127.0.0.1:8000 LINKDING_TOKEN=abcde12345 linkding ...
 ```
 
 ## Managing Bookmarks
 
-```sh
+```
 $ linkding bookmarks --help
 Usage: linkding bookmarks [OPTIONS] COMMAND [ARGS]...
 
@@ -95,7 +95,7 @@ Commands:
 
 ## Managing Tags
 
-```sh
+```
 $ linkding tags --help
 Usage: linkding tags [OPTIONS] COMMAND [ARGS]...
 
