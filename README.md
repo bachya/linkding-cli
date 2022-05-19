@@ -74,7 +74,7 @@ $ linkding -u http://127.0.0.1:8000 -t abcde12345 ...
 
 ### Environment Variables
 
-``
+```
 $ LINKDING_URL=http://127.0.0.1:8000 LINKDING_TOKEN=abcde12345 linkding ...
 ```
 
