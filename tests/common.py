@@ -1,6 +1,9 @@
 """Define common test utilities."""
 import os
 
+TEST_TOKEN = "abcde_1234"
+TEST_URL = "http://127.0.0.1:800"
+
 
 def load_fixture(filename):
     """Load a fixture."""

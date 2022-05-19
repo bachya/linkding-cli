@@ -85,8 +85,10 @@ expected-line-ending-format = "LF"
 
 [tool.pylint."MESSAGES CONTROL"]
 # Reasons disabled:
+# unnecessary-pass - This can hurt readability
 # unused-argument – Typer's modeling uses this everywhere
 disable = [
+  "unnecessary-pass",
   "unused-argument"
 ]
 

@@ -13,8 +13,9 @@
 - [Installation](#installation)
 - [Python Versions](#python-versions)
 - [Usage](#usage)
-  * [Bookmarks](#bookmarks)
-  * [Tags](#tags)
+  * [Configuration](#configuration)
+  * [Managing Bookmarks](#managing-bookmarks)
+  * [Managing Tags](#managing-tags)
 - [Contributing](#contributing)
 
 # Installation
@@ -32,6 +33,10 @@ pip install linkding-cli
 * Python 3.10
 
 # Usage
+
+Usage instructions are provided via the `--help` option (either on the main `linkding`
+executable or on any of its commands):
+
 ```
 $ linkding --help
 Usage: linkding [OPTIONS] COMMAND [ARGS]...
@@ -39,10 +44,12 @@ Usage: linkding [OPTIONS] COMMAND [ARGS]...
   Interact with a linkding instance.
 
 Options:
+  -u, --url URL         A URL to a linkding instance.  [env var: LINKDING_URL]
+  -t, --token TOKEN     A linkding API token.  [env var: LINKDING_TOKEN]
   -v, --verbose         Increase verbosity of standard output.
   --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to
-                        copy it or customize the installation.
+  --show-completion     Show completion for the current shell, to copy it or
+                        customize the installation.
   --help                Show this message and exit.
 
 Commands:
@@ -50,7 +57,28 @@ Commands:
   tags       Manage tags
 ```
 
-## Bookmarks
+## Configuration
+
+`linkding-cli` requires two configuration parameters in order to run:
+
+* A URL to a linkding instance
+* A linkding API token
+
+These can be provided in multiple ways.
+
+### CLI Options
+
+```
+$ linkding -u http://127.0.0.1:8000 -t abcde12345 ...
+```
+
+### Environment Variables
+
+```
+$ LINKDING_URL=http://127.0.0.1:8000 LINKDING_TOKEN=abcde12345 linkding ...
+```
+
+## Managing Bookmarks
 
 ```
 $ linkding bookmarks --help
@@ -65,7 +93,7 @@ Commands:
   all  Get all bookmarks.
 ```
 
-## Tags
+## Managing Tags
 
 ```
 $ linkding tags --help
