@@ -11,7 +11,6 @@ categories:
       - "bug"
   - title: "🧰 Maintenance"
     labels:
-      - "ci/cd"
       - "dependencies"
       - "maintenance"
       - "tooling"
