@@ -13,6 +13,8 @@
 - [Installation](#installation)
 - [Python Versions](#python-versions)
 - [Usage](#usage)
+  * [Bookmarks](#bookmarks)
+  * [Tags](#tags)
 - [Contributing](#contributing)
 
 # Installation
