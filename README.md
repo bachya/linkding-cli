@@ -16,6 +16,7 @@
   * [Configuration Parameters](#configuration-parameters)
   * [Managing Bookmarks](#managing-bookmarks)
   * [Managing Tags](#managing-tags)
+  * [Misc.](#misc)
 - [Contributing](#contributing)
 
 # Installation
