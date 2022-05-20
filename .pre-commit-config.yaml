@@ -28,7 +28,7 @@ repos:
           - -L ba
         exclude_types: [json]
   - repo: https://gitlab.com/pycqa/flake8
-    rev: 3.7.9
+    rev: 4.0.1
     hooks:
       - id: flake8
         additional_dependencies:

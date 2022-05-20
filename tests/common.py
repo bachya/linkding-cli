@@ -1,8 +1,25 @@
 """Define common test utilities."""
+import json
 import os
+
+from src.const import CONF_TOKEN, CONF_URL, CONF_VERBOSE
 
 TEST_TOKEN = "abcde_1234"
 TEST_URL = "http://127.0.0.1:800"
+
+TEST_RAW_JSON = json.dumps(
+    {
+        CONF_TOKEN: TEST_TOKEN,
+        CONF_URL: TEST_URL,
+        CONF_VERBOSE: False,
+    }
+)
+TEST_RAW_YAML = f"""
+---
+{CONF_TOKEN}: {TEST_TOKEN}
+{CONF_URL}: {TEST_URL}
+{CONF_VERBOSE}: false
+"""
 
 
 def load_fixture(filename):

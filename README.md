@@ -13,7 +13,7 @@
 - [Installation](#installation)
 - [Python Versions](#python-versions)
 - [Usage](#usage)
-  * [Configuration](#configuration)
+  * [Configuration Parameters](#configuration-parameters)
   * [Managing Bookmarks](#managing-bookmarks)
   * [Managing Tags](#managing-tags)
 - [Contributing](#contributing)
@@ -34,8 +34,18 @@ pip install linkding-cli
 
 # Usage
 
-Usage instructions are provided via the `--help` option (either on the main `linkding`
-executable or on any of its commands):
+## Configuration Parameters
+
+Configuration parameters can be provided via a variety of sources:
+
+* CLI Options
+* Environment Variables
+* Configuration File
+
+### Available Parameters
+
+Information about available parameters can be found via the `--help` CLI option (either on
+the main `linkding` executable or on any of its commands):
 
 ```
 $ linkding --help
@@ -44,8 +54,9 @@ Usage: linkding [OPTIONS] COMMAND [ARGS]...
   Interact with a linkding instance.
 
 Options:
-  -u, --url URL         A URL to a linkding instance.  [env var: LINKDING_URL]
+  -c, --config PATH     A path to a config file.  [env var: LINKDING_CONFIG]
   -t, --token TOKEN     A linkding API token.  [env var: LINKDING_TOKEN]
+  -u, --url URL         A URL to a linkding instance.  [env var: LINKDING_URL]
   -v, --verbose         Increase verbosity of standard output.
   --install-completion  Install completion for the current shell.
   --show-completion     Show completion for the current shell, to copy it or
@@ -55,28 +66,63 @@ Options:
 Commands:
   bookmarks  Manage bookmarks
   tags       Manage tags
-```
 
-## Configuration
+  ```
 
-`linkding-cli` requires two configuration parameters in order to run:
+The help text explains where CLI options and environment variables exist. For instance,
+the linkding API token can be provided via the `-t` option, the `--token` option, or the
+`LINKDING_TOKEN` environment variable
 
-* A URL to a linkding instance
-* A linkding API token
-
-These can be provided in multiple ways.
-
-### CLI Options
+### Example: CLI Options
 
 ```
 $ linkding -u http://127.0.0.1:8000 -t abcde12345 ...
 ```
 
-### Environment Variables
+### Example: Environment Variables
 
 ```
 $ LINKDING_URL=http://127.0.0.1:8000 LINKDING_TOKEN=abcde12345 linkding ...
 ```
+
+### Example: Configuration File
+
+The configuration file can be formatted as either JSON:
+
+```json
+{
+  "token": "abcde12345",
+  "url": "http://127.0.0.1:8000",
+  "verbose": false
+}
+```
+
+...or YAML
+
+```yaml
+---
+token: "abcde12345"
+url: "http://127.0.0.1:8000"
+verbose: false
+```
+
+Then, the linkding file can be provided via either `-c` or `--config`.
+
+```
+$ linkding -c ~/.config/linkding.json ...
+```
+
+### Merging Configuration Options
+
+When parsing configuration options, `linkding-cli` looks at the configuration sources in
+the following order:
+
+1. Configuration File
+2. Environment Variables
+3. CLI Options
+
+This allows you to mix and match sources – for instance, you might have "defaults" in
+the configuration file and override them via environment variables.
 
 ## Managing Bookmarks
 
