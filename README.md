@@ -14,8 +14,8 @@
 - [Python Versions](#python-versions)
 - [Usage](#usage)
   * [Configuration Parameters](#configuration-parameters)
-  * [Managing Bookmarks](#managing-bookmarks)
-  * [Managing Tags](#managing-tags)
+  * [Bookmarks](#bookmarks)
+  * [Tags](#tags)
   * [Misc.](#misc)
 - [Contributing](#contributing)
 
@@ -124,12 +124,29 @@ the following order:
 This allows you to mix and match sources – for instance, you might have "defaults" in
 the configuration file and override them via environment variables.
 
-## Managing Bookmarks
+## Bookmarks
 
-* Getting all unarchiveds bookmarks: `$ linkding bookmarks all`
-* Getting all archived bookmarks: `$ linkding bookmarks all --archived`
+### Getting Bookmarks
 
-## Managing Tags
+There are two primary commands to get bookmarks:
+
+* Get all unarchived bookmarks: `$ linkding bookmarks all`
+* Get all archived bookmarks: `$ linkding bookmarks all --archived`
+
+Both of these commands can have any of three additional options:
+
+* `--query QUERY`: a query to filter results with
+* `--limit LIMIT`: the total number of results to return
+* `--offset OFFSET`: the index from which to return results (e.g., `5` starts at the
+  fifth bookmark)
+
+For example:
+
+* Get all bookmarks and limit to 10 results: `$ linkding bookmarks all --limit 10`
+* Get all archived bookmarks that contain "software": `$ linkding bookmarks all
+  --archived --query software`
+
+## Tags
 
 TBD
 

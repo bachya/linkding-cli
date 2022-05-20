@@ -58,5 +58,5 @@ def main(
 
 
 APP = typer.Typer(callback=main)
-APP.add_typer(BOOKMARK_APP, name="bookmarks", help="Manage bookmarks")
-APP.add_typer(TAG_APP, name="tags", help="Manage tags")
+APP.add_typer(BOOKMARK_APP, name="bookmarks", help="Work with bookmarks.")
+APP.add_typer(TAG_APP, name="tags", help="Work with tags.")
