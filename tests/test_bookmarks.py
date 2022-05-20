@@ -18,6 +18,10 @@ from linkding_cli.main import APP
             ["bookmarks", "all", "--archived"],
             "aiolinkding.bookmark.BookmarkManager.async_get_archived",
         ),
+        (
+            ["bookmarks", "all", "--query", "test"],
+            "aiolinkding.bookmark.BookmarkManager.async_get_all",
+        ),
     ],
 )
 def test_bookmark_commands(args, patched_api_coro, runner):
@@ -38,6 +42,10 @@ def test_bookmark_commands(args, patched_api_coro, runner):
         (
             ["bookmarks", "all", "--archived"],
             "aiolinkding.bookmark.BookmarkManager.async_get_archived",
+        ),
+        (
+            ["bookmarks", "all", "--query", "test"],
+            "aiolinkding.bookmark.BookmarkManager.async_get_all",
         ),
     ],
 )
