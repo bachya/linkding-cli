@@ -14,8 +14,8 @@
 - [Python Versions](#python-versions)
 - [Usage](#usage)
   * [Configuration Parameters](#configuration-parameters)
-  * [Managing Bookmarks](#managing-bookmarks)
-  * [Managing Tags](#managing-tags)
+  * [Bookmarks](#bookmarks)
+  * [Tags](#tags)
   * [Misc.](#misc)
 - [Contributing](#contributing)
 
@@ -44,9 +44,6 @@ Configuration can be provided via a variety of sources:
 * Configuration File
 
 ### Available Parameters
-
-Information about available parameters can be found via the `--help` CLI option (either on
-the main `linkding` executable or on any of its commands):
 
 ```
 $ linkding --help
