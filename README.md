@@ -136,6 +136,7 @@ Options:
 
 Commands:
   all  Get all bookmarks.
+  id   Get a bookmark by it's linkding ID.
   ```
 
 ### The `bookmarks all` command
@@ -158,6 +159,24 @@ Some examples:
 * Get all bookmarks and limit to 10 results: `$ linkding bookmarks all --limit 10`
 * Get all archived bookmarks that contain "software": `$ linkding bookmarks all
   --archived --query software`
+
+### The `bookmarks id` command
+
+```
+Usage: linkding bookmarks id [OPTIONS] [BOOKMARK_ID]
+
+  Get a bookmark by it's linkding ID.
+
+Arguments:
+  [BOOKMARK_ID]  The ID of a bookmark to retrieve.
+
+Options:
+  --help  Show this message and exit.
+  ```
+
+An example:
+
+* Get bookmark ID 12: `$ linkding bookmarks id 12`
 
 ## Tags
 
