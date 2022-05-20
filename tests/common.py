@@ -2,7 +2,7 @@
 import json
 import os
 
-from src.const import CONF_TOKEN, CONF_URL, CONF_VERBOSE
+from linkding_cli.const import CONF_TOKEN, CONF_URL, CONF_VERBOSE
 
 TEST_TOKEN = "abcde_1234"
 TEST_URL = "http://127.0.0.1:800"

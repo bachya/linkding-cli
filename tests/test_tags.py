@@ -1,7 +1,7 @@
 """Define tests for the tag-related operations."""
 import pytest
 
-from src.main import APP
+from linkding_cli.main import APP
 
 
 def test_tags_all(runner):

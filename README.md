@@ -126,6 +126,9 @@ the configuration file and override them via environment variables.
 
 ## Managing Bookmarks
 
+(_NOTE:_ the examples provided below don't show configuration options for brevity's
+sake.)
+
 ```
 $ linkding bookmarks --help
 Usage: linkding bookmarks [OPTIONS] COMMAND [ARGS]...
@@ -138,6 +141,8 @@ Options:
 Commands:
   all  Get all bookmarks.
 ```
+
+* Getting all bookmarks: `$ linkding bookmarks all`
 
 ## Managing Tags
 
@@ -152,6 +157,46 @@ Options:
 
 Commands:
   all  Get all tags.
+```
+
+## Misc.
+
+### Parsing and Pretty Printing Data
+
+`linkding-cli` doesn't have built-in utilities for modifying JSON output in any way.
+Instead, it's recommended to use a tool like [`jq`](https://stedolan.github.io/jq/).
+This allows for multiple new outcomes, like pretty-printing:
+
+```
+$ linkding bookmarks all | jq
+{
+  "count": 123,
+  "next": "http://127.0.0.1:8000/api/bookmarks/?limit=100&offset=100",
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "url": "https://example.com",
+      "title": "Example title",
+      "description": "Example description",
+      "website_title": "Website title",
+      "website_description": "Website description",
+      "tag_names": [
+        "tag1",
+        "tag2"
+      ],
+      "date_added": "2020-09-26T09:46:23.006313Z",
+      "date_modified": "2020-09-26T16:01:14.275335Z"
+    }
+  ]
+}
+```
+
+...and slicing/parsing data:
+
+```
+$ linkding bookmarks all | jq '.results[0].title'
+"Example title"
 ```
 
 # Contributing

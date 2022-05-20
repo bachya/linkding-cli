@@ -4,14 +4,16 @@ from typing import Optional
 
 import typer
 
-from .commands.bookmark import BOOKMARK_APP
-from .commands.tag import TAG_APP
-from .const import ENV_CONFIG, ENV_TOKEN, ENV_URL
-from .core import LinkDing
-from .errors import LinkDingCliError
-from .helpers.logging import debug, error
+from linkding_cli.commands.bookmark import BOOKMARK_APP
+from linkding_cli.commands.tag import TAG_APP
+from linkding_cli.const import ENV_CONFIG, ENV_TOKEN, ENV_URL
+from linkding_cli.core import LinkDing
+from linkding_cli.errors import LinkDingCliError
+from linkding_cli.helpers.decorator import log_exception
+from linkding_cli.helpers.logging import debug
 
 
+@log_exception(LinkDingCliError)
 def main(
     ctx: typer.Context,
     config: Optional[Path] = typer.Option(
@@ -50,13 +52,9 @@ def main(
     ),
 ) -> None:
     """Interact with a linkding instance."""
-    try:
-        ctx.obj = LinkDing(ctx.params)
-    except LinkDingCliError as err:
-        error(str(err))
-        raise typer.Exit(code=1) from err
-
+    ctx.obj = LinkDing(ctx.params)
     debug(ctx, f"Starting CLI with config: {ctx.obj.config}")
+    debug(ctx, f"About to execute command: {ctx.invoked_subcommand}")
 
 
 APP = typer.Typer(callback=main)

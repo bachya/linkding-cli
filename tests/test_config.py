@@ -2,8 +2,8 @@
 import pytest
 from typer.testing import CliRunner
 
-from src.const import CONF_TOKEN, CONF_URL, ENV_TOKEN
-from src.main import APP
+from linkding_cli.const import CONF_TOKEN, CONF_URL, ENV_TOKEN
+from linkding_cli.main import APP
 
 from .common import TEST_RAW_JSON, TEST_RAW_YAML, TEST_TOKEN, TEST_URL
 
