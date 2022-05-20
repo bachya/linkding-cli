@@ -7,13 +7,20 @@ import pytest
 from linkding_cli.main import APP
 
 
-def test_bookmarks_all(bookmarks_async_get_all_response, runner):
+@pytest.mark.parametrize(
+    "args,patched_coro",
+    [
+        (["bookmarks", "all"], "aiolinkding.bookmark.BookmarkManager.async_get_all"),
+        (
+            ["bookmarks", "all", "--archived"],
+            "aiolinkding.bookmark.BookmarkManager.async_get_archived",
+        ),
+    ],
+)
+def test_bookmarks_all(args, bookmarks_multiple, patched_coro, runner):
     """Test the `linkding bookmarks all` command."""
-    with patch(
-        "aiolinkding.bookmark.BookmarkManager.async_get_all",
-        AsyncMock(return_value=bookmarks_async_get_all_response),
-    ):
-        result = runner.invoke(APP, ["bookmarks", "all"])
+    with patch(patched_coro, AsyncMock(return_value=bookmarks_multiple)):
+        result = runner.invoke(APP, args)
 
     bookmarks = json.loads(result.stdout.rstrip())
     assert len(bookmarks["results"]) == 1

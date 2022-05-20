@@ -9,10 +9,10 @@ from linkding_cli.const import ENV_TOKEN, ENV_URL
 from .common import TEST_RAW_JSON, TEST_TOKEN, TEST_URL, load_fixture
 
 
-@pytest.fixture(name="bookmarks_async_get_all_response", scope="session")
-def bookmarks_async_get_all_response_fixture():
-    """Define a fixture to return all bookmarks."""
-    return json.loads(load_fixture("bookmarks_async_get_all_response.json"))
+@pytest.fixture(name="bookmarks_multiple", scope="session")
+def bookmarks_multiple():
+    """Define a fixture to return JSON for multiple bookmarks."""
+    return json.loads(load_fixture("bookmarks_multiple.json"))
 
 
 @pytest.fixture(name="config", scope="session")
