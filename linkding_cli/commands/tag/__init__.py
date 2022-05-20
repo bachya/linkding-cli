@@ -1,4 +1,4 @@
-"""Define tag commands."""
+"""Define the tag command."""
 import typer
 
 TAG_APP = typer.Typer()
