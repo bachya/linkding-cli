@@ -57,16 +57,23 @@ Commands:
   tags       Manage tags
 ```
 
-## Configuration
+## linkding Configuration Parameters
 
 `linkding-cli` requires two configuration parameters in order to run:
 
 * A URL to a linkding instance
 * A linkding API token
 
-These can be provided in multiple ways.
+These can be provided via multiple sources:
+
+* CLI Options
+* Environment Variables
+* Configuration File
 
 ### CLI Options
+
+* The linkding URL can be provided via either `-u` or `--url`.
+* The linkding API token can be provided via either `-t` or `--token`.
 
 ```
 $ linkding -u http://127.0.0.1:8000 -t abcde12345 ...
@@ -74,9 +81,49 @@ $ linkding -u http://127.0.0.1:8000 -t abcde12345 ...
 
 ### Environment Variables
 
+* The linkding URL can be provided via the `LINKDING_URL` environment variable.
+* The linkding API token can be provided via the `LINKDING_TOKEN` environment variable.
+
 ```
 $ LINKDING_URL=http://127.0.0.1:8000 LINKDING_TOKEN=abcde12345 linkding ...
 ```
+
+### Configuration File
+
+The configuration file can be formatted as either JSON:
+
+```json
+{
+  "token": "abcde12345",
+  "url": "http://127.0.0.1:8000"
+}
+```
+
+...or YAML
+
+```yaml
+---
+token: "abcde12345"
+url: "http://127.0.0.1:8000"
+```
+
+Then, the linkding file can be provided via either `-c` or `--config`.
+
+```
+$ linkding -c ~/.config/linkding.json ...
+```
+
+### Merging Configuration Options
+
+When parsing configuration options, `linkding-cli` looks at the configuration sources in
+the following order:
+
+1. Configuration File
+2. Environment Variables
+3. CLI Options
+
+This allows you to mix and match sources – for instance, you might have "defaults" in
+the configuration file and override them via environment variables.
 
 ## Managing Bookmarks
 
