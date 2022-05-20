@@ -35,9 +35,9 @@ pip install linkding-cli
 
 # Usage
 
-## Configuration Parameters
+## Configuration
 
-Configuration parameters can be provided via a variety of sources:
+Configuration can be provided via a variety of sources:
 
 * CLI Options
 * Environment Variables
@@ -67,7 +67,6 @@ Options:
 Commands:
   bookmarks  Manage bookmarks
   tags       Manage tags
-
   ```
 
 The help text explains where CLI options and environment variables exist. For instance,
@@ -127,38 +126,12 @@ the configuration file and override them via environment variables.
 
 ## Managing Bookmarks
 
-(_NOTE:_ the examples provided below don't show configuration options for brevity's
-sake.)
-
-```
-$ linkding bookmarks --help
-Usage: linkding bookmarks [OPTIONS] COMMAND [ARGS]...
-
-  Manage bookmarks
-
-Options:
-  --help  Show this message and exit.
-
-Commands:
-  all  Get all bookmarks.
-```
-
-* Getting all bookmarks: `$ linkding bookmarks all`
+* Getting all unarchiveds bookmarks: `$ linkding bookmarks all`
+* Getting all archived bookmarks: `$ linkding bookmarks all --archived`
 
 ## Managing Tags
 
-```
-$ linkding tags --help
-Usage: linkding tags [OPTIONS] COMMAND [ARGS]...
-
-  Manage bookmarks
-
-Options:
-  --help  Show this message and exit.
-
-Commands:
-  all  Get all tags.
-```
+TBD
 
 ## Misc.
 
