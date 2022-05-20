@@ -124,7 +124,11 @@ the following order:
 This allows you to mix and match sources – for instance, you might have "defaults" in
 the configuration file and override them via environment variables.
 
-## Managing Bookmarks
+## Bookmarks
+
+### Getting Bookmarks
+
+There are two primary commands to get bookmarks:
 
 * Get all unarchived bookmarks: `$ linkding bookmarks all`
 * Get all archived bookmarks: `$ linkding bookmarks all --archived`
@@ -142,7 +146,7 @@ For example:
 * Get all archived bookmarks that contain "software": `$ linkding bookmarks all
   --archived --query software`
 
-## Managing Tags
+## Tags
 
 TBD
 
