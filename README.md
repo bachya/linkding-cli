@@ -155,11 +155,15 @@ Options:
   --help                Show this message and exit.
   ```
 
-Some examples:
+#### Examples:
 
-* Get all bookmarks and limit to 10 results: `$ linkding bookmarks all --limit 10`
-* Get all archived bookmarks that contain "software": `$ linkding bookmarks all
-  --archived --query software`
+```sh
+# Get all bookmarks, but limit the results to 10:
+$ linkding bookmarks all --limit 10
+
+# Get all archived bookmarks that contain "software":
+$ linkding bookmarks all --archived --query software
+```
 
 ### The `bookmarks id` command
 
@@ -175,9 +179,12 @@ Options:
   --help  Show this message and exit.
   ```
 
-An example:
+#### Examples:
 
-* Get bookmark ID 12: `$ linkding bookmarks id 12`
+```sh
+# Get the bookmark with an ID of 12:
+$ linkding bookmarks id 12
+```
 
 ## Tags
 
