@@ -1,27 +1,51 @@
 """Define tests for the bookmark-related operations."""
-import json
 from unittest.mock import AsyncMock, patch
 
+from aiolinkding.errors import LinkDingError
 import pytest
 
 from linkding_cli.main import APP
 
 
 @pytest.mark.parametrize(
-    "args,patched_coro",
+    "args,patched_api_coro",
     [
-        (["bookmarks", "all"], "aiolinkding.bookmark.BookmarkManager.async_get_all"),
+        (
+            ["bookmarks", "all"],
+            "aiolinkding.bookmark.BookmarkManager.async_get_all",
+        ),
         (
             ["bookmarks", "all", "--archived"],
             "aiolinkding.bookmark.BookmarkManager.async_get_archived",
         ),
     ],
 )
-def test_bookmarks_all(args, bookmarks_multiple, patched_coro, runner):
-    """Test the `linkding bookmarks all` command."""
-    with patch(patched_coro, AsyncMock(return_value=bookmarks_multiple)):
+def test_bookmark_commands(args, patched_api_coro, runner):
+    """Test various `linkding bookmarks` commands."""
+    with patch(patched_api_coro, AsyncMock(return_value="output")) as mocked_api_call:
         result = runner.invoke(APP, args)
+        mocked_api_call.assert_awaited_once()
+    assert "output" in result.stdout
 
-    bookmarks = json.loads(result.stdout.rstrip())
-    assert len(bookmarks["results"]) == 1
-    assert bookmarks["results"][0]["title"] == "Example title"
+
+@pytest.mark.parametrize(
+    "args,patched_api_coro",
+    [
+        (
+            ["bookmarks", "all"],
+            "aiolinkding.bookmark.BookmarkManager.async_get_all",
+        ),
+        (
+            ["bookmarks", "all", "--archived"],
+            "aiolinkding.bookmark.BookmarkManager.async_get_archived",
+        ),
+    ],
+)
+def test_bookmark_errors(args, patched_api_coro, runner):
+    """Test errors during various `linkding bookmarks` commands."""
+    with patch(
+        patched_api_coro, AsyncMock(side_effect=LinkDingError)
+    ) as mocked_api_call:
+        result = runner.invoke(APP, args)
+        mocked_api_call.assert_awaited_once()
+    assert "Error" in result.stdout
