@@ -5,8 +5,8 @@ from typing import Any, cast
 
 from ruamel.yaml import YAML
 
-from .const import CONF_CONFIG, CONF_TOKEN, CONF_URL, CONF_VERBOSE
-from .errors import ConfigError
+from linkding_cli.const import CONF_CONFIG, CONF_TOKEN, CONF_URL, CONF_VERBOSE
+from linkding_cli.errors import ConfigError
 
 
 class Config:

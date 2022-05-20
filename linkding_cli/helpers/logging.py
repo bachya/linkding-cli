@@ -6,7 +6,7 @@ import typer
 
 def error(msg: str) -> None:
     """Log an error message."""
-    typer.echo(f"Error: {msg}")
+    typer.echo(f"Error: {msg}", err=True)
 
 
 def debug(ctx: typer.Context, msg: str) -> None:

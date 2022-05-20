@@ -1,13 +1,21 @@
 """Define dynamic fixtures."""
+import json
+
 import pytest
 from typer.testing import CliRunner
 
-from src.const import ENV_TOKEN, ENV_URL
+from linkding_cli.const import ENV_TOKEN, ENV_URL
 
-from .common import TEST_RAW_JSON, TEST_TOKEN, TEST_URL
+from .common import TEST_RAW_JSON, TEST_TOKEN, TEST_URL, load_fixture
 
 
-@pytest.fixture(name="config")
+@pytest.fixture(name="bookmarks_async_get_all_response", scope="session")
+def bookmarks_async_get_all_response_fixture():
+    """Define a fixture to return all bookmarks."""
+    return json.loads(load_fixture("bookmarks_async_get_all_response.json"))
+
+
+@pytest.fixture(name="config", scope="session")
 def config_fixture():
     """Define a fixture to return raw configuration data."""
     return TEST_RAW_JSON
