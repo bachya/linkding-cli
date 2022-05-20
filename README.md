@@ -13,10 +13,17 @@
 - [Installation](#installation)
 - [Python Versions](#python-versions)
 - [Usage](#usage)
-  * [Configuration Parameters](#configuration-parameters)
+  * [Main Help](#main-help)
+  * [Configuration](#configuration)
+    + [Example: CLI Options](#example--cli-options)
+    + [Example: Environment Variables](#example--environment-variables)
+    + [Example: Configuration File](#example--configuration-file)
+    + [Merging Configuration Options](#merging-configuration-options)
   * [Bookmarks](#bookmarks)
+    + [The `bookmarks all` command](#the--bookmarks-all--command)
   * [Tags](#tags)
   * [Misc.](#misc)
+    + [Parsing and Pretty Printing Data](#parsing-and-pretty-printing-data)
 - [Contributing](#contributing)
 
 # Installation
@@ -35,18 +42,7 @@ pip install linkding-cli
 
 # Usage
 
-## Configuration
-
-Configuration can be provided via a variety of sources:
-
-* CLI Options
-* Environment Variables
-* Configuration File
-
-### Available Parameters
-
-Information about available parameters can be found via the `--help` CLI option (either on
-the main `linkding` executable or on any of its commands):
+## Main Help
 
 ```
 $ linkding --help
@@ -65,13 +61,17 @@ Options:
   --help                Show this message and exit.
 
 Commands:
-  bookmarks  Manage bookmarks
-  tags       Manage tags
+  bookmarks  Work with bookmarks.
+  tags       Work with tags.
   ```
 
-The help text explains where CLI options and environment variables exist. For instance,
-the linkding API token can be provided via the `-t` option, the `--token` option, or the
-`LINKDING_TOKEN` environment variable
+## Configuration
+
+Configuration can be provided via a variety of sources:
+
+* CLI Options
+* Environment Variables
+* Configuration File
 
 ### Example: CLI Options
 
@@ -126,21 +126,34 @@ the configuration file and override them via environment variables.
 
 ## Bookmarks
 
-### Getting Bookmarks
+```
+Usage: linkding bookmarks [OPTIONS] COMMAND [ARGS]...
 
-There are two primary commands to get bookmarks:
+  Work with bookmarks.
 
-* Get all unarchived bookmarks: `$ linkding bookmarks all`
-* Get all archived bookmarks: `$ linkding bookmarks all --archived`
+Options:
+  --help  Show this message and exit.
 
-Both of these commands can have any of three additional options:
+Commands:
+  all  Get all bookmarks.
+  ```
 
-* `--query QUERY`: a query to filter results with
-* `--limit LIMIT`: the total number of results to return
-* `--offset OFFSET`: the index from which to return results (e.g., `5` starts at the
-  fifth bookmark)
+### The `bookmarks all` command
 
-For example:
+```
+Usage: linkding bookmarks all [OPTIONS]
+
+  Get all bookmarks.
+
+Options:
+  -a, --archived        Return archived bookmarks.
+  -l, --limit INTEGER   The number of bookmarks to return.
+  -o, --offset INTEGER  The index from which to return results.
+  -q, --query TEXT      Return bookmarks containing a query string.
+  --help                Show this message and exit.
+  ```
+
+Some examples:
 
 * Get all bookmarks and limit to 10 results: `$ linkding bookmarks all --limit 10`
 * Get all archived bookmarks that contain "software": `$ linkding bookmarks all
