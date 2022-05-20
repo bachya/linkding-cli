@@ -45,6 +45,9 @@ Configuration can be provided via a variety of sources:
 
 ### Available Parameters
 
+Information about available parameters can be found via the `--help` CLI option (either on
+the main `linkding` executable or on any of its commands):
+
 ```
 $ linkding --help
 Usage: linkding [OPTIONS] COMMAND [ARGS]...
