@@ -58,5 +58,19 @@ def get_all(
     typer.echo(json.dumps(data))
 
 
+@log_exception(LinkDingError)
+def get_by_id(
+    ctx: typer.Context,
+    bookmark_id: int = typer.Argument(
+        None,
+        help="The ID of a bookmark to retrieve.",
+    ),
+) -> None:
+    """Get a bookmark by it's linkding ID."""
+    data = asyncio.run(ctx.obj.client.bookmarks.async_get_single(bookmark_id))
+    typer.echo(json.dumps(data))
+
+
 BOOKMARK_APP = typer.Typer()
 BOOKMARK_APP.command(name="all")(get_all)
+BOOKMARK_APP.command(name="id")(get_by_id)

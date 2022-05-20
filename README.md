@@ -20,7 +20,8 @@
     + [Example: Configuration File](#example--configuration-file)
     + [Merging Configuration Options](#merging-configuration-options)
   * [Bookmarks](#bookmarks)
-    + [The `bookmarks all` command](#the--bookmarks-all--command)
+    + [The `bookmarks all` command](#the-bookmarks-all-command)
+    + [The `bookmarks id` command](#the-bookmarks-id-command)
   * [Tags](#tags)
   * [Misc.](#misc)
     + [Parsing and Pretty Printing Data](#parsing-and-pretty-printing-data)
@@ -136,6 +137,7 @@ Options:
 
 Commands:
   all  Get all bookmarks.
+  id   Get a bookmark by it's linkding ID.
   ```
 
 ### The `bookmarks all` command
@@ -153,11 +155,36 @@ Options:
   --help                Show this message and exit.
   ```
 
-Some examples:
+#### Examples:
 
-* Get all bookmarks and limit to 10 results: `$ linkding bookmarks all --limit 10`
-* Get all archived bookmarks that contain "software": `$ linkding bookmarks all
-  --archived --query software`
+```sh
+# Get all bookmarks, but limit the results to 10:
+$ linkding bookmarks all --limit 10
+
+# Get all archived bookmarks that contain "software":
+$ linkding bookmarks all --archived --query software
+```
+
+### The `bookmarks id` command
+
+```
+Usage: linkding bookmarks id [OPTIONS] [BOOKMARK_ID]
+
+  Get a bookmark by it's linkding ID.
+
+Arguments:
+  [BOOKMARK_ID]  The ID of a bookmark to retrieve.
+
+Options:
+  --help  Show this message and exit.
+  ```
+
+#### Examples:
+
+```sh
+# Get the bookmark with an ID of 12:
+$ linkding bookmarks id 12
+```
 
 ## Tags
 
