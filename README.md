@@ -13,7 +13,7 @@
 - [Installation](#installation)
 - [Python Versions](#python-versions)
 - [Usage](#usage)
-  * [linkding Configuration Parameters](#linkding-configuration-parameters)
+  * [Configuration Parameters](#configuration-parameters)
   * [Managing Bookmarks](#managing-bookmarks)
   * [Managing Tags](#managing-tags)
 - [Contributing](#contributing)
@@ -57,7 +57,7 @@ Commands:
   tags       Manage tags
 ```
 
-## linkding Configuration Parameters
+## Configuration Parameters
 
 `linkding-cli` requires two configuration parameters in order to run:
 
