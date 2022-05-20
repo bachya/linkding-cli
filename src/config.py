@@ -34,10 +34,9 @@ class Config:
 
         # If, after all the configuration loading, we don't have a URL or a token, we
         # can't proceed:
-        if not self._config[CONF_TOKEN]:
-            raise ConfigError(f"Missing required option: --{CONF_TOKEN}")
-        if not self._config[CONF_URL]:
-            raise ConfigError(f"Missing required option: --{CONF_URL}")
+        for param in (CONF_TOKEN, CONF_URL):
+            if not self._config[param]:
+                raise ConfigError(f"Missing required option: --{param}")
 
     def __str__(self) -> str:
         """Define the string representation."""
