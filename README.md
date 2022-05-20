@@ -13,7 +13,7 @@
 - [Installation](#installation)
 - [Python Versions](#python-versions)
 - [Usage](#usage)
-  * [Configuration](#configuration)
+  * [linkding Configuration Parameters](#linkding-configuration-parameters)
   * [Managing Bookmarks](#managing-bookmarks)
   * [Managing Tags](#managing-tags)
 - [Contributing](#contributing)
