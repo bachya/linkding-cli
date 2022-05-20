@@ -1,6 +1,5 @@
 """Define common test utilities."""
 import json
-import os
 
 from linkding_cli.const import CONF_TOKEN, CONF_URL, CONF_VERBOSE
 
@@ -20,10 +19,3 @@ TEST_RAW_YAML = f"""
 {CONF_URL}: {TEST_URL}
 {CONF_VERBOSE}: false
 """
-
-
-def load_fixture(filename):
-    """Load a fixture."""
-    path = os.path.join(os.path.dirname(__file__), "fixtures", filename)
-    with open(path, encoding="utf-8") as fptr:
-        return fptr.read()
