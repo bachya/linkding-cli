@@ -8,60 +8,46 @@ from linkding_cli.main import APP
 
 
 @pytest.mark.parametrize(
-    "args,patched_api_coro",
+    "args,api_coro,api_coro_args,api_coro_kwargs",
     [
         (
             ["bookmarks", "all"],
             "aiolinkding.bookmark.BookmarkManager.async_get_all",
+            [],
+            {},
         ),
         (
             ["bookmarks", "all", "--archived"],
             "aiolinkding.bookmark.BookmarkManager.async_get_archived",
+            [],
+            {},
         ),
         (
             ["bookmarks", "all", "--query", "test"],
             "aiolinkding.bookmark.BookmarkManager.async_get_all",
+            [],
+            {"query": "test"},
         ),
         (
             ["bookmarks", "id", "12"],
             "aiolinkding.bookmark.BookmarkManager.async_get_single",
+            [12],
+            {},
         ),
     ],
 )
-def test_bookmark_commands(args, patched_api_coro, runner):
-    """Test various `linkding bookmarks` commands."""
-    with patch(patched_api_coro, AsyncMock(return_value="output")) as mocked_api_call:
-        result = runner.invoke(APP, args)
-        mocked_api_call.assert_awaited_once()
-    assert "output" in result.stdout
-
-
 @pytest.mark.parametrize(
-    "args,patched_api_coro",
+    "result,output",
     [
-        (
-            ["bookmarks", "all"],
-            "aiolinkding.bookmark.BookmarkManager.async_get_all",
-        ),
-        (
-            ["bookmarks", "all", "--archived"],
-            "aiolinkding.bookmark.BookmarkManager.async_get_archived",
-        ),
-        (
-            ["bookmarks", "all", "--query", "test"],
-            "aiolinkding.bookmark.BookmarkManager.async_get_all",
-        ),
-        (
-            ["bookmarks", "id", "12"],
-            "aiolinkding.bookmark.BookmarkManager.async_get_single",
-        ),
+        (AsyncMock(side_effect=LinkDingError), "Error"),
+        (AsyncMock(return_value="{}"), "{}"),
     ],
 )
-def test_bookmark_errors(args, patched_api_coro, runner):
-    """Test errors during various `linkding bookmarks` commands."""
-    with patch(
-        patched_api_coro, AsyncMock(side_effect=LinkDingError)
-    ) as mocked_api_call:
+def test_bookmark_commands(  # pylint: disable=too-many-arguments
+    args, api_coro, api_coro_args, api_coro_kwargs, output, result, runner
+):
+    """Test various `linkding bookmarks` commands (success and error)."""
+    with patch(api_coro, result) as mocked_api_call:
         result = runner.invoke(APP, args)
-        mocked_api_call.assert_awaited_once()
-    assert "Error" in result.stdout
+        mocked_api_call.assert_awaited_with(*api_coro_args, **api_coro_kwargs)
+    assert output in result.stdout
