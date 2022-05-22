@@ -8,12 +8,10 @@ from linkding_cli.commands.bookmark import BOOKMARK_APP
 from linkding_cli.commands.tag import TAG_APP
 from linkding_cli.const import ENV_CONFIG, ENV_TOKEN, ENV_URL
 from linkding_cli.core import LinkDing
-from linkding_cli.errors import LinkDingCliError
-from linkding_cli.helpers.decorator import log_exception
-from linkding_cli.helpers.logging import debug
+from linkding_cli.helpers.logging import debug, log_exception
 
 
-@log_exception(LinkDingCliError)
+@log_exception()
 def main(
     ctx: typer.Context,
     config: Optional[Path] = typer.Option(
