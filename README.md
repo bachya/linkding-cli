@@ -190,11 +190,7 @@ Options:
 $ linkding bookmarks create https://example.com
 
 # Create a bookmark with title, description, and tags:
-$ linkding bookmarks create \
-    https://example.com \
-    -t Example
-    -d "A description" \
-    --tags tag1,tag2
+$ linkding bookmarks create https://example.com -t Example -d "A description" --tags tag1,tag2
 ```
 
 ### The `bookmarks get` command
