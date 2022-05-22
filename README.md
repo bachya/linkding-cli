@@ -21,6 +21,7 @@
     + [Merging Configuration Options](#merging-configuration-options)
   * [Bookmarks](#bookmarks)
     + [The `bookmarks all` command](#the-bookmarks-all-command)
+    + [The `bookmarks create` command](#the-bookmarks-create-command)
     + [The `bookmarks get` command](#the-bookmarks-get-command)
   * [Tags](#tags)
   * [Misc.](#misc)
