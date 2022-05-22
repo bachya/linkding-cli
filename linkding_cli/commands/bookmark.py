@@ -4,14 +4,13 @@ from __future__ import annotations
 import asyncio
 import json
 
-from aiolinkding.errors import LinkDingError
 import typer
 
 from linkding_cli.const import CONF_LIMIT, CONF_OFFSET, CONF_QUERY
-from linkding_cli.helpers.decorator import log_exception
+from linkding_cli.helpers.logging import log_exception
 
 
-@log_exception(LinkDingError)
+@log_exception()
 def get_all(
     ctx: typer.Context,
     archived: bool = typer.Option(
@@ -58,7 +57,7 @@ def get_all(
     typer.echo(json.dumps(data))
 
 
-@log_exception(LinkDingError)
+@log_exception()
 def get_by_id(
     ctx: typer.Context,
     bookmark_id: int = typer.Argument(
