@@ -6,8 +6,59 @@ import json
 
 import typer
 
-from linkding_cli.const import CONF_LIMIT, CONF_OFFSET, CONF_QUERY
-from linkding_cli.helpers.logging import log_exception
+from linkding_cli.helpers.logging import debug, log_exception
+
+CONF_DESCRIPTION = "description"
+CONF_LIMIT = "limit"
+CONF_OFFSET = "offset"
+CONF_QUERY = "query"
+CONF_TAG_NAMES = "tag_names"
+CONF_TITLE = "title"
+
+
+@log_exception()
+def create(
+    ctx: typer.Context,
+    url: str = typer.Argument(..., help="The URL to bookmark."),
+    description: str = typer.Option(
+        None,
+        "--description",
+        "-d",
+        help="The description to give the bookmark.",
+        metavar="DESCRIPTION",
+    ),
+    tag_names: str = typer.Option(
+        None,
+        "--tags",
+        help="The tags to apply to the bookmark.",
+        metavar="TAG1,TAG2,...",
+    ),
+    title: str = typer.Option(
+        None,
+        "--title",
+        "-t",
+        help="The title to give the bookmark.",
+        metavar="TITLE",
+    ),
+) -> None:
+    """Create a bookmark."""
+    kwargs = {}
+
+    if tag_names:
+        tags = tag_names.split(",")
+    else:
+        tags = []
+
+    for param, conf_key in (
+        (title, CONF_TITLE),
+        (description, CONF_DESCRIPTION),
+        (tags, CONF_TAG_NAMES),
+    ):
+        if param:
+            kwargs[conf_key] = param
+
+    data = asyncio.run(ctx.obj.client.bookmarks.async_create(url, **kwargs))
+    typer.echo(json.dumps(data))
 
 
 @log_exception()
@@ -36,6 +87,7 @@ def get_all(
         "--query",
         "-q",
         help="Return bookmarks containing a query string.",
+        metavar="QUERY",
     ),
 ) -> None:
     """Get all bookmarks."""
@@ -60,16 +112,22 @@ def get_all(
 @log_exception()
 def get_by_id(
     ctx: typer.Context,
-    bookmark_id: int = typer.Argument(
-        None,
-        help="The ID of a bookmark to retrieve.",
-    ),
+    bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to retrieve."),
 ) -> None:
     """Get a bookmark by it's linkding ID."""
     data = asyncio.run(ctx.obj.client.bookmarks.async_get_single(bookmark_id))
     typer.echo(json.dumps(data))
 
 
-BOOKMARK_APP = typer.Typer()
+@log_exception()
+def main(ctx: typer.Context) -> None:
+    """Interact with bookmarks."""
+    debug(ctx, f"Command: {ctx.invoked_subcommand}")
+    debug(ctx, f"Arguments: {ctx.args}")
+    debug(ctx, f"Options: {ctx.params}")
+
+
+BOOKMARK_APP = typer.Typer(callback=main)
 BOOKMARK_APP.command(name="all")(get_all)
-BOOKMARK_APP.command(name="id")(get_by_id)
+BOOKMARK_APP.command(name="create")(create)
+BOOKMARK_APP.command(name="get")(get_by_id)

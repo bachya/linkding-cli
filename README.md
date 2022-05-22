@@ -21,7 +21,7 @@
     + [Merging Configuration Options](#merging-configuration-options)
   * [Bookmarks](#bookmarks)
     + [The `bookmarks all` command](#the-bookmarks-all-command)
-    + [The `bookmarks id` command](#the-bookmarks-id-command)
+    + [The `bookmarks get` command](#the-bookmarks-get-command)
   * [Tags](#tags)
   * [Misc.](#misc)
     + [Parsing and Pretty Printing Data](#parsing-and-pretty-printing-data)
@@ -165,10 +165,41 @@ $ linkding bookmarks all --limit 10
 $ linkding bookmarks all --archived --query software
 ```
 
-### The `bookmarks id` command
+### The `bookmarks create` command
 
 ```
-Usage: linkding bookmarks id [OPTIONS] [BOOKMARK_ID]
+Usage: linkding bookmarks create [OPTIONS] URL
+
+  Create a bookmark.
+
+Arguments:
+  URL  The URL to bookmark.  [required]
+
+Options:
+  -d, --description DESCRIPTION  The description to give the bookmark.
+  --tags TAG1,TAG2,...           The tags to apply to the bookmark.
+  -t, --title TITLE              The title to give the bookmark.
+  --help                         Show this message and exit.
+  ```
+
+#### Examples:
+
+```sh
+# Create a bookmark:
+$ linkding bookmarks create https://example.com
+
+# Create a bookmark with title, description, and tags:
+$ linkding bookmarks create \
+    https://example.com \
+    -t Example
+    -d "A description" \
+    --tags tag1,tag2
+```
+
+### The `bookmarks get` command
+
+```
+Usage: linkding bookmarks get [OPTIONS] [BOOKMARK_ID]
 
   Get a bookmark by it's linkding ID.
 
@@ -183,7 +214,7 @@ Options:
 
 ```sh
 # Get the bookmark with an ID of 12:
-$ linkding bookmarks id 12
+$ linkding bookmarks get 12
 ```
 
 ## Tags
