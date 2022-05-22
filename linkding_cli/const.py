@@ -1,8 +1,4 @@
 """Define package constants."""
-CONF_CONFIG = "config"
-CONF_LIMIT = "limit"
-CONF_OFFSET = "offset"
-CONF_QUERY = "query"
 CONF_TOKEN = "token"
 CONF_URL = "url"
 CONF_VERBOSE = "verbose"
