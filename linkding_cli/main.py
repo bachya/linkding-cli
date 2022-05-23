@@ -51,10 +51,11 @@ def main(
 ) -> None:
     """Interact with a linkding instance."""
     ctx.obj = LinkDing(ctx.params)
-    debug(ctx, f"Config: {ctx.obj.config}")
-    debug(ctx, f"Command: {ctx.invoked_subcommand}")
-    debug(ctx, f"Arguments: {ctx.args}")
-    debug(ctx, f"Options: {ctx.params}")
+    if ctx.obj.config.verbose:
+        debug(f"Config: {ctx.obj.config}")
+        debug(f"Command: {ctx.invoked_subcommand}")
+        debug(f"Arguments: {ctx.args}")
+        debug(f"Options: {ctx.params}")
 
 
 APP = typer.Typer(callback=main)

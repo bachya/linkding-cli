@@ -91,12 +91,11 @@ def test_url_and_token_via_env_vars(runner):
     assert f"<Config token={TEST_TOKEN} url={TEST_URL} verbose=True" in result.stdout
 
 
-def test_verbose_logging(runner):
+@pytest.mark.parametrize("args", [["bookmarks"], ["bookmarks", "all"]])
+def test_verbose_logging(args, runner):
     """Test verbose logging."""
-    result = runner.invoke(APP, ["bookmarks"])
-    assert not any(
-        line for line in result.stdout.rstrip().split("\n") if "Debug" in line
-    )
+    result = runner.invoke(APP, args)
+    assert "Debug" not in result.stdout
 
-    result = runner.invoke(APP, ["-v", "bookmarks"])
-    assert any(line for line in result.stdout.rstrip().split("\n") if "Debug" in line)
+    result = runner.invoke(APP, ["-v"] + args)
+    assert "Debug" in result.stdout
