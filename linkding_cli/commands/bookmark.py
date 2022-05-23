@@ -34,27 +34,15 @@ def create_or_update(
     else:
         tags = None
 
-    if bookmark_id:
-        api_kwargs = generate_api_payload(
-            (
-                (CONF_URL, url),
-                (CONF_TITLE, title),
-                (CONF_DESCRIPTION, description),
-                (CONF_TAG_NAMES, tags),
-            )
+    api_kwargs = generate_api_payload(
+        (
+            (CONF_TITLE, title),
+            (CONF_DESCRIPTION, description),
+            (CONF_TAG_NAMES, tags),
         )
-        api_func = partial(ctx.obj.client.bookmarks.async_update, bookmark_id)
-    else:
-        api_kwargs = generate_api_payload(
-            (
-                (CONF_TITLE, title),
-                (CONF_DESCRIPTION, description),
-                (CONF_TAG_NAMES, tags),
-            )
-        )
-        api_func = partial(ctx.obj.client.bookmarks.async_create, url)
+    )
+    api_func = partial(ctx.obj.client.bookmarks.async_create, url)
 
-    print(api_kwargs)
     data = asyncio.run(api_func(**api_kwargs))
     typer.echo(json.dumps(data))
 
