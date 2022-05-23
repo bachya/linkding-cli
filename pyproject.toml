@@ -86,9 +86,11 @@ expected-line-ending-format = "LF"
 
 [tool.pylint."MESSAGES CONTROL"]
 # Reasons disabled:
+# too-many-arguments - Typer uses lots of args everywhere
 # unnecessary-pass - This can hurt readability
 # unused-argument – Typer's modeling uses this everywhere
 disable = [
+  "too-many-arguments",
   "unnecessary-pass",
   "unused-argument"
 ]

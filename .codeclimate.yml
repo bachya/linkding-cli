@@ -1,5 +1,7 @@
 ---
 engines:
+  argument-count:
+    enabled: false
   duplication:
     enabled: true
     config:
