@@ -109,7 +109,7 @@ from linkding_cli.main import APP
         (AsyncMock(return_value="{}"), "{}"),
     ],
 )
-def test_bookmark_commands(  # pylint: disable=too-many-arguments
+def test_bookmark_commands(
     args, api_coro, api_coro_args, api_coro_kwargs, output, result, runner
 ):
     """Test various `linkding bookmarks` commands (success and error)."""

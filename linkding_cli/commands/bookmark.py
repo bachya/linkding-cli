@@ -2,11 +2,13 @@
 from __future__ import annotations
 
 import asyncio
+from functools import partial
 import json
 
 import typer
 
 from linkding_cli.helpers.logging import debug, log_exception
+from linkding_cli.util import generate_api_payload
 
 CONF_DESCRIPTION = "description"
 CONF_LIMIT = "limit"
@@ -14,6 +16,47 @@ CONF_OFFSET = "offset"
 CONF_QUERY = "query"
 CONF_TAG_NAMES = "tag_names"
 CONF_TITLE = "title"
+CONF_URL = "url"
+
+
+def create_or_update(
+    ctx: typer.Context,
+    *,
+    bookmark_id: int | None = None,
+    description: str | None = None,
+    tag_names: str | None = None,
+    title: str | None = None,
+    url: str | None = None,
+) -> None:
+    """Create or update a bookmark."""
+    if tag_names:
+        tags = tag_names.split(",")
+    else:
+        tags = None
+
+    if bookmark_id:
+        api_kwargs = generate_api_payload(
+            (
+                (CONF_URL, url),
+                (CONF_TITLE, title),
+                (CONF_DESCRIPTION, description),
+                (CONF_TAG_NAMES, tags),
+            )
+        )
+        api_func = partial(ctx.obj.client.bookmarks.async_update, bookmark_id)
+    else:
+        api_kwargs = generate_api_payload(
+            (
+                (CONF_TITLE, title),
+                (CONF_DESCRIPTION, description),
+                (CONF_TAG_NAMES, tags),
+            )
+        )
+        api_func = partial(ctx.obj.client.bookmarks.async_create, url)
+
+    print(api_kwargs)
+    data = asyncio.run(api_func(**api_kwargs))
+    typer.echo(json.dumps(data))
 
 
 @log_exception()
@@ -42,23 +85,9 @@ def create(
     ),
 ) -> None:
     """Create a bookmark."""
-    kwargs = {}
-
-    if tag_names:
-        tags = tag_names.split(",")
-    else:
-        tags = []
-
-    for param, conf_key in (
-        (title, CONF_TITLE),
-        (description, CONF_DESCRIPTION),
-        (tags, CONF_TAG_NAMES),
-    ):
-        if param:
-            kwargs[conf_key] = param
-
-    data = asyncio.run(ctx.obj.client.bookmarks.async_create(url, **kwargs))
-    typer.echo(json.dumps(data))
+    return create_or_update(
+        ctx, url=url, description=description, tag_names=tag_names, title=title
+    )
 
 
 @log_exception()
@@ -91,21 +120,19 @@ def get_all(
     ),
 ) -> None:
     """Get all bookmarks."""
-    kwargs = {}
-
-    for param, conf_key in (
-        (limit, CONF_LIMIT),
-        (offset, CONF_OFFSET),
-        (query, CONF_QUERY),
-    ):
-        if param:
-            kwargs[conf_key] = param
+    api_kwargs = generate_api_payload(
+        (
+            (CONF_LIMIT, limit),
+            (CONF_OFFSET, offset),
+            (CONF_QUERY, query),
+        )
+    )
 
     if archived:
-        func = ctx.obj.client.bookmarks.async_get_archived
+        api_func = ctx.obj.client.bookmarks.async_get_archived
     else:
-        func = ctx.obj.client.bookmarks.async_get_all
-    data = asyncio.run(func(**kwargs))
+        api_func = ctx.obj.client.bookmarks.async_get_all
+    data = asyncio.run(api_func(**api_kwargs))
     typer.echo(json.dumps(data))
 
 
