@@ -137,9 +137,10 @@ def get_by_id(
 @log_exception()
 def main(ctx: typer.Context) -> None:
     """Interact with bookmarks."""
-    debug(ctx, f"Command: {ctx.invoked_subcommand}")
-    debug(ctx, f"Arguments: {ctx.args}")
-    debug(ctx, f"Options: {ctx.params}")
+    if ctx.obj.config.verbose:
+        debug(f"Command: {ctx.invoked_subcommand}")
+        debug(f"Arguments: {ctx.args}")
+        debug(f"Options: {ctx.params}")
 
 
 BOOKMARK_APP = typer.Typer(callback=main)

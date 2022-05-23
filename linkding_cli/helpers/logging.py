@@ -14,10 +14,8 @@ def error(msg: str) -> None:
     typer.echo(f"Error: {msg}", err=True)
 
 
-def debug(ctx: typer.Context, msg: str) -> None:
+def debug(msg: str) -> None:
     """Log a debug message."""
-    if not ctx.obj.config.verbose:
-        return
     typer.echo(f"Debug: {msg}")
 
 
