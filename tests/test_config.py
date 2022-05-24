@@ -91,7 +91,14 @@ def test_url_and_token_via_env_vars(runner):
     assert f"<Config token={TEST_TOKEN} url={TEST_URL} verbose=True" in result.stdout
 
 
-@pytest.mark.parametrize("args", [["bookmarks"], ["bookmarks", "all"]])
+@pytest.mark.parametrize(
+    "args",
+    [
+        ["bookmarks"],
+        ["bookmarks", "all"],
+        ["tags", "all"],
+    ],
+)
 def test_verbose_logging(args, runner):
     """Test verbose logging."""
     result = runner.invoke(APP, args)

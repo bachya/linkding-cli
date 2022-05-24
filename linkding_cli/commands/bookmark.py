@@ -7,12 +7,11 @@ import json
 
 import typer
 
+from linkding_cli.const import CONF_LIMIT, CONF_OFFSET
 from linkding_cli.helpers.logging import debug, log_exception
 from linkding_cli.util import generate_api_payload
 
 CONF_DESCRIPTION = "description"
-CONF_LIMIT = "limit"
-CONF_OFFSET = "offset"
 CONF_QUERY = "query"
 CONF_TAG_NAMES = "tag_names"
 CONF_TITLE = "title"
