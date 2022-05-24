@@ -8,7 +8,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/f01be3cd230902508636/maintainability)](https://codeclimate.com/github/bachya/linkding-cli/maintainability)
 [![Say Thanks](https://img.shields.io/badge/SayThanks-!-1EAEDB.svg)](https://saythanks.io/to/bachya)
 
-`linkding-cli` is a CLI to interact with a linkding instance.
+`linkding-cli` is a CLI to interact with a
+[linkding](https://github.com/sissbruecker/linkding) instance.
 
 - [Installation](#installation)
 - [Python Versions](#python-versions)
