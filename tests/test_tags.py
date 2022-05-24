@@ -54,6 +54,14 @@ TAGS_SINGLE_RESPONSE = {
             json.dumps(TAGS_ALL_RESPONSE),
         ),
         (
+            ["tags", "create", "sample-tag"],
+            "aiolinkding.tag.TagManager.async_create",
+            ["sample-tag"],
+            {},
+            TAGS_SINGLE_RESPONSE,
+            json.dumps(TAGS_SINGLE_RESPONSE),
+        ),
+        (
             ["tags", "get", "12"],
             "aiolinkding.tag.TagManager.async_get_single",
             [12],
