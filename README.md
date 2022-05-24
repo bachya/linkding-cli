@@ -28,6 +28,7 @@
     + [The `bookmarks unarchive` command](#the-bookmarks-unarchive-command)
     + [The `bookmarks update` command](#the-bookmarks-update-command)
   * [Tags](#tags)
+    + [The `tags all` command](#the-tags-all-command)
   * [Misc.](#misc)
     + [Parsing and Pretty Printing Data](#parsing-and-pretty-printing-data)
 - [Contributing](#contributing)
@@ -316,7 +317,37 @@ $ linkding bookmarks update 12 -t Example -d "A description" --tags tag1,tag2
 
 ## Tags
 
-TBD
+```
+Usage: linkding tags [OPTIONS] COMMAND [ARGS]...
+
+  Work with tags.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  all  Get all tags.
+  ```
+
+### The `tags all` command
+
+```
+Usage: linkding tags all [OPTIONS]
+
+  Get all tags.
+
+Options:
+  -l, --limit INTEGER   The number of tags to return.
+  -o, --offset INTEGER  The index from which to return results.
+  --help                Show this message and exit.
+  ```
+
+#### Examples:
+
+```sh
+# Get all tags, but limit the results to 10:
+$ linkding tags all --limit 10
+```
 
 ## Misc.
 

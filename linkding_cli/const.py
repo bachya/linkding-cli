@@ -1,4 +1,6 @@
 """Define package constants."""
+CONF_LIMIT = "limit"
+CONF_OFFSET = "offset"
 CONF_TOKEN = "token"
 CONF_URL = "url"
 CONF_VERBOSE = "verbose"
