@@ -21,9 +21,11 @@
     + [Merging Configuration Options](#merging-configuration-options)
   * [Bookmarks](#bookmarks)
     + [The `bookmarks all` command](#the-bookmarks-all-command)
+    + [The `bookmarks archive` command](#the-bookmarks-archive-command)
     + [The `bookmarks create` command](#the-bookmarks-create-command)
     + [The `bookmarks delete` command](#the-bookmarks-delete-command)
     + [The `bookmarks get` command](#the-bookmarks-get-command)
+    + [The `bookmarks unarchive` command](#the-bookmarks-unarchive-command)
     + [The `bookmarks update` command](#the-bookmarks-update-command)
   * [Tags](#tags)
   * [Misc.](#misc)
@@ -139,8 +141,13 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  all  Get all bookmarks.
-  id   Get a bookmark by it's linkding ID.
+  all        Get all bookmarks.
+  archive    Archive a bookmark by it's linkding ID.
+  create     Create a bookmark.
+  delete     Delete a bookmark by it's linkding ID.
+  get        Get a bookmark by it's linkding ID.
+  unarchive  Unarchive a bookmark by it's linkding ID.
+  update     Update a bookmark.
   ```
 
 ### The `bookmarks all` command
@@ -166,6 +173,27 @@ $ linkding bookmarks all --limit 10
 
 # Get all archived bookmarks that contain "software":
 $ linkding bookmarks all --archived --query software
+```
+
+### The `bookmarks archive` command
+
+```
+Usage: linkding bookmarks archive [OPTIONS] [BOOKMARK_ID]
+
+  Archive a bookmark by it's linkding ID.
+
+Arguments:
+  [BOOKMARK_ID]  The ID of a bookmark to archive.
+
+Options:
+  --help  Show this message and exit.
+  ```
+
+#### Examples:
+
+```sh
+# Archive bookmark 12:
+$ linkding bookmarks archive 12
 ```
 
 ### The `bookmarks create` command
@@ -235,6 +263,27 @@ Options:
 ```sh
 # Get bookmark 12:
 $ linkding bookmarks get 12
+```
+
+### The `bookmarks unarchive` command
+
+```
+Usage: linkding bookmarks unarchive [OPTIONS] [BOOKMARK_ID]
+
+  Unarchive a bookmark by it's linkding ID.
+
+Arguments:
+  [BOOKMARK_ID]  The ID of a bookmark to unarchive.
+
+Options:
+  --help  Show this message and exit.
+  ```
+
+#### Examples:
+
+```sh
+# Unarchive bookmark 12:
+$ linkding bookmarks unarchive 12
 ```
 
 ### The `bookmarks update` command
