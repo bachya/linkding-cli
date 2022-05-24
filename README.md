@@ -202,7 +202,7 @@ Usage: linkding bookmarks delete [OPTIONS] [BOOKMARK_ID]
   Delete a bookmark by it's linkding ID.
 
 Arguments:
-  [BOOKMARK_ID]  The ID of a bookmark to retrieve.
+  [BOOKMARK_ID]  The ID of a bookmark to delete.
 
 Options:
   --help  Show this message and exit.

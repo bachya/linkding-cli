@@ -81,7 +81,7 @@ def create(
 @log_exception()
 def delete(
     ctx: typer.Context,
-    bookmark_id: int = typer.Argument(..., help="The bookmark to delete."),
+    bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to delete."),
 ) -> None:
     """Delete a bookmark by it's linkding ID."""
     asyncio.run(ctx.obj.client.bookmarks.async_delete(bookmark_id))
