@@ -29,6 +29,7 @@
     + [The `bookmarks update` command](#the-bookmarks-update-command)
   * [Tags](#tags)
     + [The `tags all` command](#the-tags-all-command)
+    + [The `tags get` command](#the-tags-get-command)
   * [Misc.](#misc)
     + [Parsing and Pretty Printing Data](#parsing-and-pretty-printing-data)
 - [Contributing](#contributing)
@@ -143,12 +144,12 @@ Options:
 
 Commands:
   all        Get all bookmarks.
-  archive    Archive a bookmark by it's linkding ID.
+  archive    Archive a bookmark by its linkding ID.
   create     Create a bookmark.
-  delete     Delete a bookmark by it's linkding ID.
-  get        Get a bookmark by it's linkding ID.
-  unarchive  Unarchive a bookmark by it's linkding ID.
-  update     Update a bookmark.
+  delete     Delete a bookmark by its linkding ID.
+  get        Get a bookmark by its linkding ID.
+  unarchive  Unarchive a bookmark by its linkding ID.
+  update     Update a bookmark by its linkding ID.
   ```
 
 ### The `bookmarks all` command
@@ -181,7 +182,7 @@ $ linkding bookmarks all --archived --query software
 ```
 Usage: linkding bookmarks archive [OPTIONS] [BOOKMARK_ID]
 
-  Archive a bookmark by it's linkding ID.
+  Archive a bookmark by its linkding ID.
 
 Arguments:
   [BOOKMARK_ID]  The ID of a bookmark to archive.
@@ -229,7 +230,7 @@ $ linkding bookmarks create https://example.com -t Example -d "A description" --
 ```
 Usage: linkding bookmarks delete [OPTIONS] [BOOKMARK_ID]
 
-  Delete a bookmark by it's linkding ID.
+  Delete a bookmark by its linkding ID.
 
 Arguments:
   [BOOKMARK_ID]  The ID of a bookmark to delete.
@@ -250,7 +251,7 @@ $ linkding bookmarks delete 12
 ```
 Usage: linkding bookmarks get [OPTIONS] [BOOKMARK_ID]
 
-  Get a bookmark by it's linkding ID.
+  Get a bookmark by its linkding ID.
 
 Arguments:
   [BOOKMARK_ID]  The ID of a bookmark to retrieve.
@@ -271,7 +272,7 @@ $ linkding bookmarks get 12
 ```
 Usage: linkding bookmarks unarchive [OPTIONS] [BOOKMARK_ID]
 
-  Unarchive a bookmark by it's linkding ID.
+  Unarchive a bookmark by its linkding ID.
 
 Arguments:
   [BOOKMARK_ID]  The ID of a bookmark to unarchive.
@@ -292,7 +293,7 @@ $ linkding bookmarks unarchive 12
 ```
 Usage: linkding bookmarks update [OPTIONS] BOOKMARK_ID
 
-  Update a bookmark.
+  Update a bookmark by its linkdingn ID.
 
 Arguments:
   BOOKMARK_ID  The ID of a bookmark to update.  [required]
@@ -327,6 +328,7 @@ Options:
 
 Commands:
   all  Get all tags.
+  get  Get a tag by its linkding ID.
   ```
 
 ### The `tags all` command
@@ -347,6 +349,27 @@ Options:
 ```sh
 # Get all tags, but limit the results to 10:
 $ linkding tags all --limit 10
+```
+
+### The `tags get` command
+
+```
+Usage: linkding tags get [OPTIONS] TAG_ID
+
+  Get a tag by its linkding ID.
+
+Arguments:
+  TAG_ID  The ID of a tag to retrieve.  [required]
+
+Options:
+  --help  Show this message and exit.
+  ```
+
+#### Examples:
+
+```sh
+# Get tag 12:
+$ linkding tags get 12
 ```
 
 ## Misc.

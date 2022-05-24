@@ -38,6 +38,16 @@ def get_all(
 
 
 @log_exception()
+def get_by_id(
+    ctx: typer.Context,
+    tag_id: int = typer.Argument(..., help="The ID of a tag to retrieve."),
+) -> None:
+    """Get a tag by its linkding ID."""
+    data = asyncio.run(ctx.obj.client.tags.async_get_single(tag_id))
+    typer.echo(json.dumps(data))
+
+
+@log_exception()
 def main(ctx: typer.Context) -> None:
     """Interact with tags."""
     if ctx.obj.config.verbose:
@@ -48,3 +58,4 @@ def main(ctx: typer.Context) -> None:
 
 TAG_APP = typer.Typer(callback=main)
 TAG_APP.command(name="all")(get_all)
+TAG_APP.command(name="get")(get_by_id)
