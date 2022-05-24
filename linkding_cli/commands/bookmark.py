@@ -62,7 +62,7 @@ def archive(
     ctx: typer.Context,
     bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to archive."),
 ) -> None:
-    """Archive a bookmark by it's linkding ID."""
+    """Archive a bookmark by its linkding ID."""
     asyncio.run(ctx.obj.client.bookmarks.async_archive(bookmark_id))
     typer.echo(f"Bookmark {bookmark_id} archived.")
 
@@ -103,7 +103,7 @@ def delete(
     ctx: typer.Context,
     bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to delete."),
 ) -> None:
-    """Delete a bookmark by it's linkding ID."""
+    """Delete a bookmark by its linkding ID."""
     asyncio.run(ctx.obj.client.bookmarks.async_delete(bookmark_id))
     typer.echo(f"Bookmark {bookmark_id} deleted.")
 
@@ -159,7 +159,7 @@ def get_by_id(
     ctx: typer.Context,
     bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to retrieve."),
 ) -> None:
-    """Get a bookmark by it's linkding ID."""
+    """Get a bookmark by its linkding ID."""
     data = asyncio.run(ctx.obj.client.bookmarks.async_get_single(bookmark_id))
     typer.echo(json.dumps(data))
 
@@ -178,7 +178,7 @@ def unarchive(
     ctx: typer.Context,
     bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to archive."),
 ) -> None:
-    """Unarchive a bookmark by it's linkding ID."""
+    """Unarchive a bookmark by its linkding ID."""
     asyncio.run(ctx.obj.client.bookmarks.async_unarchive(bookmark_id))
     typer.echo(f"Bookmark {bookmark_id} unarchived.")
 
@@ -215,7 +215,7 @@ def update(
         metavar="TITLE",
     ),
 ) -> None:
-    """Update a bookmark."""
+    """Update a bookmark by its linkding ID."""
     if all(val is None for val in (url, description, tag_names, title)):
         raise ValueError("Cannot update a bookmark with passing at least one option.")
 

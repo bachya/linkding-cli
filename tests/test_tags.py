@@ -12,7 +12,11 @@ TAGS_ALL_RESPONSE = {
     "next": "http://127.0.0.1:8000/api/tags/?limit=100&offset=100",
     "previous": None,
     "results": [
-        {"id": 1, "name": "example", "date_added": "2020-09-26T09:46:23.006313Z"}
+        {
+            "id": 1,
+            "name": "example",
+            "date_added": "2020-09-26T09:46:23.006313Z",
+        }
     ],
 }
 TAGS_SINGLE_RESPONSE = {
@@ -48,6 +52,14 @@ TAGS_SINGLE_RESPONSE = {
             {"offset": 5},
             TAGS_ALL_RESPONSE,
             json.dumps(TAGS_ALL_RESPONSE),
+        ),
+        (
+            ["tags", "get", "12"],
+            "aiolinkding.tag.TagManager.async_get_single",
+            [12],
+            {},
+            TAGS_SINGLE_RESPONSE,
+            json.dumps(TAGS_SINGLE_RESPONSE),
         ),
     ],
 )
