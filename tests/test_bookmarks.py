@@ -157,12 +157,28 @@ BOOKMARKS_SINGLE_RESPONSE = {
             BOOKMARKS_SINGLE_RESPONSE,
             json.dumps(BOOKMARKS_SINGLE_RESPONSE),
         ),
+        (
+            ["bookmarks", "update", "12", "-u", "https://example.com"],
+            "aiolinkding.bookmark.BookmarkManager.async_update",
+            [12],
+            {"url": "https://example.com"},
+            BOOKMARKS_SINGLE_RESPONSE,
+            json.dumps(BOOKMARKS_SINGLE_RESPONSE),
+        ),
+        (
+            ["bookmarks", "update", "12", "-t", "Updated Title"],
+            "aiolinkding.bookmark.BookmarkManager.async_update",
+            [12],
+            {"title": "Updated Title"},
+            BOOKMARKS_SINGLE_RESPONSE,
+            json.dumps(BOOKMARKS_SINGLE_RESPONSE),
+        ),
     ],
 )
-def test_bookmark_commands(
+def test_bookmark_command_api_calls(
     args, api_coro, api_coro_args, api_coro_kwargs, api_output, runner, stdout_output
 ):
-    """Test various `linkding bookmarks` commands (success and error)."""
+    """Test various `linkding bookmarks` commands/API calls (success and error)."""
     with patch(api_coro, AsyncMock(return_value=api_output)) as mocked_api_call:
         result = runner.invoke(APP, args)
         mocked_api_call.assert_awaited_with(*api_coro_args, **api_coro_kwargs)
@@ -172,3 +188,9 @@ def test_bookmark_commands(
         result = runner.invoke(APP, args)
         mocked_api_call.assert_awaited_with(*api_coro_args, **api_coro_kwargs)
     assert "Error" in result.stdout
+
+
+def test_update_no_options(runner):
+    """Test that attempting to update a bookmark with no options fails."""
+    result = runner.invoke(APP, ["bookmarks", "update", "12"])
+    assert "Cannot update a bookmark with passing at least one option." in result.stdout

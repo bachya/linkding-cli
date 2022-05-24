@@ -197,6 +197,9 @@ def update(
     ),
 ) -> None:
     """Update a bookmark."""
+    if all(val is None for val in (url, description, tag_names, title)):
+        raise ValueError("Cannot update a bookmark with passing at least one option.")
+
     return create_or_update(
         ctx,
         bookmark_id=bookmark_id,

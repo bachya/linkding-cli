@@ -24,6 +24,7 @@
     + [The `bookmarks create` command](#the-bookmarks-create-command)
     + [The `bookmarks delete` command](#the-bookmarks-delete-command)
     + [The `bookmarks get` command](#the-bookmarks-get-command)
+    + [The `bookmarks update` command](#the-bookmarks-update-command)
   * [Tags](#tags)
   * [Misc.](#misc)
     + [Parsing and Pretty Printing Data](#parsing-and-pretty-printing-data)
@@ -232,8 +233,36 @@ Options:
 #### Examples:
 
 ```sh
-# Get the bookmark with an ID of 12:
+# Get bookmark 12:
 $ linkding bookmarks get 12
+```
+
+### The `bookmarks update` command
+
+```
+Usage: linkding bookmarks update [OPTIONS] BOOKMARK_ID
+
+  Update a bookmark.
+
+Arguments:
+  BOOKMARK_ID  The ID of a bookmark to update.  [required]
+
+Options:
+  -u, --url URL                  The URL to assign to the bookmark.
+  -d, --description DESCRIPTION  The description to give the bookmark.
+  --tags TAG1,TAG2,...           The tags to apply to the bookmark.
+  -t, --title TITLE              The title to give the bookmark.
+  --help                         Show this message and exit.
+  ```
+
+#### Examples:
+
+```sh
+# Update a bookmark with a new url:
+$ linkding bookmarks update 12 -u https://example.com
+
+# Update a bookmark with title, description, and tags:
+$ linkding bookmarks update 12 -t Example -d "A description" --tags tag1,tag2
 ```
 
 ## Tags
