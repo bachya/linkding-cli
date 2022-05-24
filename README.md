@@ -22,6 +22,7 @@
   * [Bookmarks](#bookmarks)
     + [The `bookmarks all` command](#the-bookmarks-all-command)
     + [The `bookmarks create` command](#the-bookmarks-create-command)
+    + [The `bookmarks delete` command](#the-bookmarks-delete-command)
     + [The `bookmarks get` command](#the-bookmarks-get-command)
   * [Tags](#tags)
   * [Misc.](#misc)
@@ -191,6 +192,27 @@ $ linkding bookmarks create https://example.com
 
 # Create a bookmark with title, description, and tags:
 $ linkding bookmarks create https://example.com -t Example -d "A description" --tags tag1,tag2
+```
+
+### The `bookmarks delete` command
+
+```
+Usage: linkding bookmarks delete [OPTIONS] [BOOKMARK_ID]
+
+  Delete a bookmark by it's linkding ID.
+
+Arguments:
+  [BOOKMARK_ID]  The ID of a bookmark to retrieve.
+
+Options:
+  --help  Show this message and exit.
+  ```
+
+#### Examples:
+
+```sh
+# Delete the bookmark with an ID of 12:
+$ linkding bookmarks delete 12
 ```
 
 ### The `bookmarks get` command
