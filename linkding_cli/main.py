@@ -1,6 +1,5 @@
 """Define the main interface to the CLI."""
 from pathlib import Path
-from typing import Optional
 
 import typer
 
@@ -14,7 +13,7 @@ from linkding_cli.helpers.logging import debug, log_exception
 @log_exception()
 def main(
     ctx: typer.Context,
-    config: Optional[Path] = typer.Option(
+    config: Path = typer.Option(
         None,
         "--config",
         "-c",
@@ -26,7 +25,7 @@ def main(
         metavar="PATH",
         resolve_path=True,
     ),
-    token: Optional[str] = typer.Option(
+    token: str = typer.Option(
         None,
         "--token",
         "-t",
@@ -34,7 +33,7 @@ def main(
         help="A linkding API token.",
         metavar="TOKEN",
     ),
-    url: Optional[str] = typer.Option(
+    url: str = typer.Option(
         None,
         "--url",
         "-u",
