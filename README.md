@@ -29,6 +29,7 @@
     + [The `bookmarks update` command](#the-bookmarks-update-command)
   * [Tags](#tags)
     + [The `tags all` command](#the-tags-all-command)
+    + [The `tags create` command](#the-tags-create-command)
     + [The `tags get` command](#the-tags-get-command)
   * [Misc.](#misc)
     + [Parsing and Pretty Printing Data](#parsing-and-pretty-printing-data)
@@ -327,8 +328,9 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  all  Get all tags.
-  get  Get a tag by its linkding ID.
+  all     Get all tags.
+  create  Create a tag.
+  get     Get a tag by its linkding ID.
   ```
 
 ### The `tags all` command
@@ -349,6 +351,27 @@ Options:
 ```sh
 # Get all tags, but limit the results to 10:
 $ linkding tags all --limit 10
+```
+
+### The `tags create` command
+
+```
+Usage: linkding tags create [OPTIONS] TAG_NAME
+
+  Create a tag.
+
+Arguments:
+  TAG_NAME  The tag to create.  [required]
+
+Options:
+  --help  Show this message and exit.
+  ```
+
+#### Examples:
+
+```sh
+# Create a tag:
+$ linkding tags create sample-tag
 ```
 
 ### The `tags get` command

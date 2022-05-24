@@ -10,6 +10,16 @@ from linkding_cli.util import generate_api_payload
 
 
 @log_exception()
+def create(
+    ctx: typer.Context,
+    tag_name: str = typer.Argument(..., help="The tag to create."),
+) -> None:
+    """Create a tag."""
+    data = asyncio.run(ctx.obj.client.tags.async_create(tag_name))
+    typer.echo(json.dumps(data))
+
+
+@log_exception()
 def get_all(
     ctx: typer.Context,
     limit: int = typer.Option(
@@ -58,4 +68,5 @@ def main(ctx: typer.Context) -> None:
 
 TAG_APP = typer.Typer(callback=main)
 TAG_APP.command(name="all")(get_all)
+TAG_APP.command(name="create")(create)
 TAG_APP.command(name="get")(get_by_id)
