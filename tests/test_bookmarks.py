@@ -66,6 +66,14 @@ BOOKMARKS_SINGLE_RESPONSE = {
             json.dumps(BOOKMARKS_ALL_RESPONSE),
         ),
         (
+            ["bookmarks", "archive", "12"],
+            "aiolinkding.bookmark.BookmarkManager.async_archive",
+            [12],
+            {},
+            None,
+            "Bookmark 12 archived.",
+        ),
+        (
             ["bookmarks", "create", "https://example.com"],
             "aiolinkding.bookmark.BookmarkManager.async_create",
             ["https://example.com"],
@@ -156,6 +164,14 @@ BOOKMARKS_SINGLE_RESPONSE = {
             {},
             BOOKMARKS_SINGLE_RESPONSE,
             json.dumps(BOOKMARKS_SINGLE_RESPONSE),
+        ),
+        (
+            ["bookmarks", "unarchive", "12"],
+            "aiolinkding.bookmark.BookmarkManager.async_unarchive",
+            [12],
+            {},
+            None,
+            "Bookmark 12 unarchived.",
         ),
         (
             ["bookmarks", "update", "12", "-u", "https://example.com"],

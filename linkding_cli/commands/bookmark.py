@@ -59,6 +59,16 @@ def create_or_update(
 
 
 @log_exception()
+def archive(
+    ctx: typer.Context,
+    bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to archive."),
+) -> None:
+    """Archive a bookmark by it's linkding ID."""
+    asyncio.run(ctx.obj.client.bookmarks.async_archive(bookmark_id))
+    typer.echo(f"Bookmark {bookmark_id} archived.")
+
+
+@log_exception()
 def create(
     ctx: typer.Context,
     url: str = typer.Argument(..., help="The URL to bookmark."),
@@ -165,6 +175,16 @@ def main(ctx: typer.Context) -> None:
 
 
 @log_exception()
+def unarchive(
+    ctx: typer.Context,
+    bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to archive."),
+) -> None:
+    """Unarchive a bookmark by it's linkding ID."""
+    asyncio.run(ctx.obj.client.bookmarks.async_unarchive(bookmark_id))
+    typer.echo(f"Bookmark {bookmark_id} unarchived.")
+
+
+@log_exception()
 def update(
     ctx: typer.Context,
     bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to update."),
@@ -212,7 +232,9 @@ def update(
 
 BOOKMARK_APP = typer.Typer(callback=main)
 BOOKMARK_APP.command(name="all")(get_all)
+BOOKMARK_APP.command(name="archive")(archive)
 BOOKMARK_APP.command(name="create")(create)
 BOOKMARK_APP.command(name="delete")(delete)
 BOOKMARK_APP.command(name="get")(get_by_id)
+BOOKMARK_APP.command(name="unarchive")(unarchive)
 BOOKMARK_APP.command(name="update")(update)
