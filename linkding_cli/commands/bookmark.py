@@ -79,6 +79,16 @@ def create(
 
 
 @log_exception()
+def delete(
+    ctx: typer.Context,
+    bookmark_id: int = typer.Argument(..., help="The bookmark to delete."),
+) -> None:
+    """Delete a bookmark by it's linkding ID."""
+    asyncio.run(ctx.obj.client.bookmarks.async_delete(bookmark_id))
+    typer.echo(f"Bookmark {bookmark_id} deleted.")
+
+
+@log_exception()
 def get_all(
     ctx: typer.Context,
     archived: bool = typer.Option(
@@ -146,4 +156,5 @@ def main(ctx: typer.Context) -> None:
 BOOKMARK_APP = typer.Typer(callback=main)
 BOOKMARK_APP.command(name="all")(get_all)
 BOOKMARK_APP.command(name="create")(create)
+BOOKMARK_APP.command(name="delete")(delete)
 BOOKMARK_APP.command(name="get")(get_by_id)
