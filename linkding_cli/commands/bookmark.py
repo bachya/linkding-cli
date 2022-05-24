@@ -34,14 +34,25 @@ def create_or_update(
     else:
         tags = None
 
-    api_kwargs = generate_api_payload(
-        (
-            (CONF_TITLE, title),
-            (CONF_DESCRIPTION, description),
-            (CONF_TAG_NAMES, tags),
+    if bookmark_id:
+        api_kwargs = generate_api_payload(
+            (
+                (CONF_URL, url),
+                (CONF_TITLE, title),
+                (CONF_DESCRIPTION, description),
+                (CONF_TAG_NAMES, tags),
+            )
         )
-    )
-    api_func = partial(ctx.obj.client.bookmarks.async_create, url)
+        api_func = partial(ctx.obj.client.bookmarks.async_update, bookmark_id)
+    else:
+        api_kwargs = generate_api_payload(
+            (
+                (CONF_TITLE, title),
+                (CONF_DESCRIPTION, description),
+                (CONF_TAG_NAMES, tags),
+            )
+        )
+        api_func = partial(ctx.obj.client.bookmarks.async_create, url)
 
     data = asyncio.run(api_func(**api_kwargs))
     typer.echo(json.dumps(data))
@@ -153,8 +164,55 @@ def main(ctx: typer.Context) -> None:
         debug(f"Options: {ctx.params}")
 
 
+@log_exception()
+def update(
+    ctx: typer.Context,
+    bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to update."),
+    url: str = typer.Option(
+        None,
+        "--url",
+        "-u",
+        help="The URL to assign to the bookmark.",
+        metavar="URL",
+    ),
+    description: str = typer.Option(
+        None,
+        "--description",
+        "-d",
+        help="The description to give the bookmark.",
+        metavar="DESCRIPTION",
+    ),
+    tag_names: str = typer.Option(
+        None,
+        "--tags",
+        help="The tags to apply to the bookmark.",
+        metavar="TAG1,TAG2,...",
+    ),
+    title: str = typer.Option(
+        None,
+        "--title",
+        "-t",
+        help="The title to give the bookmark.",
+        metavar="TITLE",
+    ),
+) -> None:
+    """Update a bookmark."""
+    if all(val is None for val in (url, description, tag_names, title)):
+        raise ValueError("Cannot update a bookmark with passing at least one option.")
+
+    return create_or_update(
+        ctx,
+        bookmark_id=bookmark_id,
+        url=url,
+        description=description,
+        tag_names=tag_names,
+        title=title,
+    )
+
+
 BOOKMARK_APP = typer.Typer(callback=main)
 BOOKMARK_APP.command(name="all")(get_all)
 BOOKMARK_APP.command(name="create")(create)
 BOOKMARK_APP.command(name="delete")(delete)
 BOOKMARK_APP.command(name="get")(get_by_id)
+BOOKMARK_APP.command(name="update")(update)
