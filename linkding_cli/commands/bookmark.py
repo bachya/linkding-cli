@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import asyncio
-from functools import partial
 import json
 
 import typer
@@ -11,50 +10,12 @@ from linkding_cli.const import CONF_LIMIT, CONF_OFFSET
 from linkding_cli.helpers.logging import debug, log_exception
 from linkding_cli.util import generate_api_payload
 
+CONF_ARCHIVED = "archived"
 CONF_DESCRIPTION = "description"
 CONF_QUERY = "query"
 CONF_TAG_NAMES = "tag_names"
 CONF_TITLE = "title"
 CONF_URL = "url"
-
-
-def create_or_update(
-    ctx: typer.Context,
-    *,
-    bookmark_id: int | None = None,
-    description: str | None = None,
-    tag_names: str | None = None,
-    title: str | None = None,
-    url: str | None = None,
-) -> None:
-    """Create or update a bookmark."""
-    if tag_names:
-        tags = tag_names.split(",")
-    else:
-        tags = None
-
-    if bookmark_id:
-        api_kwargs = generate_api_payload(
-            (
-                (CONF_URL, url),
-                (CONF_TITLE, title),
-                (CONF_DESCRIPTION, description),
-                (CONF_TAG_NAMES, tags),
-            )
-        )
-        api_func = partial(ctx.obj.client.bookmarks.async_update, bookmark_id)
-    else:
-        api_kwargs = generate_api_payload(
-            (
-                (CONF_TITLE, title),
-                (CONF_DESCRIPTION, description),
-                (CONF_TAG_NAMES, tags),
-            )
-        )
-        api_func = partial(ctx.obj.client.bookmarks.async_create, url)
-
-    data = asyncio.run(api_func(**api_kwargs))
-    typer.echo(json.dumps(data))
 
 
 @log_exception()
@@ -71,6 +32,12 @@ def archive(
 def create(
     ctx: typer.Context,
     url: str = typer.Argument(..., help="The URL to bookmark."),
+    archived: bool = typer.Option(
+        False,
+        "--archived",
+        "-a",
+        help="Whether the newly-created bookmark should be immediately archived.",
+    ),
     description: str = typer.Option(
         None,
         "--description",
@@ -93,9 +60,22 @@ def create(
     ),
 ) -> None:
     """Create a bookmark."""
-    return create_or_update(
-        ctx, url=url, description=description, tag_names=tag_names, title=title
+    if tag_names:
+        tags = tag_names.split(",")
+    else:
+        tags = None
+
+    payload = generate_api_payload(
+        (
+            (CONF_ARCHIVED, archived),
+            (CONF_DESCRIPTION, description),
+            (CONF_TAG_NAMES, tags),
+            (CONF_TITLE, title),
+        )
     )
+
+    data = asyncio.run(ctx.obj.client.bookmarks.async_create(url, **payload))
+    typer.echo(json.dumps(data))
 
 
 @log_exception()
@@ -219,14 +199,22 @@ def update(
     if all(val is None for val in (url, description, tag_names, title)):
         raise ValueError("Cannot update a bookmark with passing at least one option.")
 
-    return create_or_update(
-        ctx,
-        bookmark_id=bookmark_id,
-        url=url,
-        description=description,
-        tag_names=tag_names,
-        title=title,
+    if tag_names:
+        tags = tag_names.split(",")
+    else:
+        tags = None
+
+    payload = generate_api_payload(
+        (
+            (CONF_DESCRIPTION, description),
+            (CONF_TAG_NAMES, tags),
+            (CONF_TITLE, title),
+            (CONF_URL, url),
+        )
     )
+
+    data = asyncio.run(ctx.obj.client.bookmarks.async_update(bookmark_id, **payload))
+    typer.echo(json.dumps(data))
 
 
 BOOKMARK_APP = typer.Typer(callback=main)
