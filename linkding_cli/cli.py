@@ -7,7 +7,7 @@ from linkding_cli.commands.bookmark import BOOKMARK_APP
 from linkding_cli.commands.tag import TAG_APP
 from linkding_cli.const import ENV_CONFIG, ENV_TOKEN, ENV_URL
 from linkding_cli.core import LinkDing
-from linkding_cli.helpers.logging import debug, log_exception
+from linkding_cli.helpers.logging import log_exception
 
 
 @log_exception()
@@ -49,12 +49,7 @@ def main(
     ),
 ) -> None:
     """Interact with a linkding instance."""
-    ctx.obj = LinkDing(ctx.params)
-    if ctx.obj.config.verbose:
-        debug(f"Config: {ctx.obj.config}")
-        debug(f"Command: {ctx.invoked_subcommand}")
-        debug(f"Arguments: {ctx.args}")
-        debug(f"Options: {ctx.params}")
+    ctx.obj = LinkDing(ctx)
 
 
 APP = typer.Typer(callback=main)

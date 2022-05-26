@@ -1,4 +1,8 @@
 """Define package constants."""
+import logging
+
+LOGGER = logging.getLogger(__package__)
+
 CONF_LIMIT = "limit"
 CONF_OFFSET = "offset"
 CONF_TOKEN = "token"

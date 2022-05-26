@@ -79,7 +79,7 @@ pytest = "^7.0.0"
 pytest-cov = "^3.0.0"
 
 [tool.poetry.scripts]
-linkding = "linkding_cli.main:APP"
+linkding = "linkding_cli.cli:APP"
 
 [tool.pylint.BASIC]
 expected-line-ending-format = "LF"
