@@ -211,6 +211,8 @@ Arguments:
   URL  The URL to bookmark.  [required]
 
 Options:
+  -a, --archived                 Whether the newly-created bookmark should be
+                                 immediately archived.
   -d, --description DESCRIPTION  The description to give the bookmark.
   --tags TAG1,TAG2,...           The tags to apply to the bookmark.
   -t, --title TITLE              The title to give the bookmark.
@@ -222,6 +224,9 @@ Options:
 ```sh
 # Create a bookmark:
 $ linkding bookmarks create https://example.com
+
+# Create a bookmark and immeditely archive it:
+$ linkding bookmarks create -a https://example.com
 
 # Create a bookmark with title, description, and tags:
 $ linkding bookmarks create https://example.com -t Example -d "A description" --tags tag1,tag2
