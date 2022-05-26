@@ -7,7 +7,7 @@ import json
 import typer
 
 from linkding_cli.const import CONF_LIMIT, CONF_OFFSET
-from linkding_cli.helpers.logging import debug, log_exception
+from linkding_cli.helpers.logging import log_exception
 from linkding_cli.util import generate_api_payload
 
 CONF_ARCHIVED = "archived"
@@ -147,10 +147,7 @@ def get_by_id(
 @log_exception()
 def main(ctx: typer.Context) -> None:
     """Interact with bookmarks."""
-    if ctx.obj.config.verbose:
-        debug(f"Command: {ctx.invoked_subcommand}")
-        debug(f"Arguments: {ctx.args}")
-        debug(f"Options: {ctx.params}")
+    pass
 
 
 @log_exception()

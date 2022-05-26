@@ -1,11 +1,12 @@
 """Define tests for the tag-related operations."""
 import json
+import logging
 from unittest.mock import AsyncMock, patch
 
 from aiolinkding.errors import LinkDingError
 import pytest
 
-from linkding_cli.main import APP
+from linkding_cli.cli import APP
 
 TAGS_ALL_RESPONSE = {
     "count": 123,
@@ -71,16 +72,18 @@ TAGS_SINGLE_RESPONSE = {
         ),
     ],
 )
-def test_bookmark_command_api_calls(
-    args, api_coro, api_coro_args, api_coro_kwargs, api_output, runner, stdout_output
+def test_tag_command_api_calls(
+    args,
+    api_coro,
+    api_coro_args,
+    api_coro_kwargs,
+    api_output,
+    caplog,
+    runner,
+    stdout_output,
 ):
-    """Test various `linkding tags` commands/API calls (success and error)."""
+    """Test various `linkding tags` commands/API calls."""
     with patch(api_coro, AsyncMock(return_value=api_output)) as mocked_api_call:
         result = runner.invoke(APP, args)
         mocked_api_call.assert_awaited_with(*api_coro_args, **api_coro_kwargs)
     assert stdout_output in result.stdout
-
-    with patch(api_coro, AsyncMock(side_effect=LinkDingError)) as mocked_api_call:
-        result = runner.invoke(APP, args)
-        mocked_api_call.assert_awaited_with(*api_coro_args, **api_coro_kwargs)
-    assert "Error" in result.stdout

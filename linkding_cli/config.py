@@ -1,11 +1,12 @@
 """Define configuration management."""
 from __future__ import annotations
 
-from typing import Any, cast
+from typing import cast
 
 from ruamel.yaml import YAML
+import typer
 
-from linkding_cli.const import CONF_TOKEN, CONF_URL, CONF_VERBOSE
+from linkding_cli.const import CONF_TOKEN, CONF_URL, CONF_VERBOSE, LOGGER
 from linkding_cli.errors import ConfigError
 
 CONF_CONFIG = "config"
@@ -14,12 +15,16 @@ CONF_CONFIG = "config"
 class Config:
     """Define the config manager object."""
 
-    def __init__(self, params: dict[str, Any]) -> None:
+    def __init__(self, ctx: typer.Context) -> None:
         """Initialize."""
+        LOGGER.debug("Command: %s", ctx.invoked_subcommand)
+        LOGGER.debug("Arguments: %s", ctx.args)
+        LOGGER.debug("Options: %s", ctx.params)
+
         self._config = {}
 
         # If the user provides a config file, attempt to load it:
-        if config_path := params[CONF_CONFIG]:
+        if config_path := ctx.params[CONF_CONFIG]:
             parser = YAML(typ="safe")
             with open(config_path, encoding="utf-8") as config_file:
                 self._config = parser.load(config_file)
@@ -30,7 +35,7 @@ class Config:
         # Merge the CLI options/environment variables in using this logic:
         #   1. If the value is not None, its an override and we should use it
         #   2. If a key doesn't exist in self._config yet, include it
-        for key, value in params.items():
+        for key, value in ctx.params.items():
             if value is not None or key not in self._config:
                 self._config[key] = value
 
@@ -39,6 +44,8 @@ class Config:
         for param in (CONF_TOKEN, CONF_URL):
             if not self._config[param]:
                 raise ConfigError(f"Missing required option: --{param}")
+
+        LOGGER.debug("Loaded Config: %s", self)
 
     def __str__(self) -> str:
         """Define the string representation."""
