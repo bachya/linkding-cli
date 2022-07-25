@@ -216,6 +216,8 @@ Options:
   -d, --description DESCRIPTION  The description to give the bookmark.
   --tags TAG1,TAG2,...           The tags to apply to the bookmark.
   -t, --title TITLE              The title to give the bookmark.
+  -u, --unread                   Whether the newly-created bookmark should be
+                                 marked as unread.
   --help                         Show this message and exit.
   ```
 
@@ -310,6 +312,8 @@ Options:
   -d, --description DESCRIPTION  The description to give the bookmark.
   --tags TAG1,TAG2,...           The tags to apply to the bookmark.
   -t, --title TITLE              The title to give the bookmark.
+  -u, --unread                   Whether the bookmark should be marked as
+                                 unread.
   --help                         Show this message and exit.
   ```
 

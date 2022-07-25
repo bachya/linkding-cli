@@ -15,6 +15,7 @@ CONF_DESCRIPTION = "description"
 CONF_QUERY = "query"
 CONF_TAG_NAMES = "tag_names"
 CONF_TITLE = "title"
+CONF_UNREAD = "unread"
 CONF_URL = "url"
 
 
@@ -58,6 +59,11 @@ def create(
         help="The title to give the bookmark.",
         metavar="TITLE",
     ),
+    unread: bool = typer.Option(
+        False,
+        "--unread",
+        help="Whether the newly-created bookmark should be marked as unread.",
+    ),
 ) -> None:
     """Create a bookmark."""
     if tag_names:
@@ -71,6 +77,7 @@ def create(
             (CONF_DESCRIPTION, description),
             (CONF_TAG_NAMES, tags),
             (CONF_TITLE, title),
+            (CONF_UNREAD, unread),
         )
     )
 
@@ -191,11 +198,13 @@ def update(
         help="The title to give the bookmark.",
         metavar="TITLE",
     ),
+    unread: bool = typer.Option(
+        False,
+        "--unread",
+        help="Whether the bookmark should be marked as unread.",
+    ),
 ) -> None:
     """Update a bookmark by its linkding ID."""
-    if all(val is None for val in (url, description, tag_names, title)):
-        raise ValueError("Cannot update a bookmark with passing at least one option.")
-
     if tag_names:
         tags = tag_names.split(",")
     else:
@@ -206,6 +215,7 @@ def update(
             (CONF_DESCRIPTION, description),
             (CONF_TAG_NAMES, tags),
             (CONF_TITLE, title),
+            (CONF_UNREAD, unread),
             (CONF_URL, url),
         )
     )
