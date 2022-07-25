@@ -62,7 +62,6 @@ def create(
     unread: bool = typer.Option(
         False,
         "--unread",
-        "-u",
         help="Whether the newly-created bookmark should be marked as unread.",
     ),
 ) -> None:
@@ -202,14 +201,10 @@ def update(
     unread: bool = typer.Option(
         False,
         "--unread",
-        "-u",
         help="Whether the bookmark should be marked as unread.",
     ),
 ) -> None:
     """Update a bookmark by its linkding ID."""
-    if all(val is None for val in (url, description, tag_names, title)):
-        raise ValueError("Cannot update a bookmark with passing at least one option.")
-
     if tag_names:
         tags = tag_names.split(",")
     else:

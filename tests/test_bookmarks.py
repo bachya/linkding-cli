@@ -19,6 +19,8 @@ BOOKMARKS_ALL_RESPONSE = {
             "description": "Example description",
             "website_title": "Website title",
             "website_description": "Website description",
+            "is_archived": False,
+            "unread": False,
             "tag_names": ["tag1", "tag2"],
             "date_added": "2020-09-26T09:46:23.006313Z",
             "date_modified": "2020-09-26T16:01:14.275335Z",
@@ -32,6 +34,8 @@ BOOKMARKS_SINGLE_RESPONSE = {
     "description": "Example description",
     "website_title": "Website title",
     "website_description": "Website description",
+    "is_archived": False,
+    "unread": False,
     "tag_names": ["tag1", "tag2"],
     "date_added": "2020-09-26T09:46:23.006313Z",
     "date_modified": "2020-09-26T16:01:14.275335Z",
@@ -93,7 +97,7 @@ BOOKMARKS_SINGLE_RESPONSE = {
             ["bookmarks", "create", "https://example.com"],
             "aiolinkding.bookmark.BookmarkManager.async_create",
             ["https://example.com"],
-            {"archived": False},
+            {"archived": False, "unread": False},
             BOOKMARKS_SINGLE_RESPONSE,
             json.dumps(BOOKMARKS_SINGLE_RESPONSE),
         ),
@@ -101,7 +105,7 @@ BOOKMARKS_SINGLE_RESPONSE = {
             ["bookmarks", "create", "https://example.com", "-a"],
             "aiolinkding.bookmark.BookmarkManager.async_create",
             ["https://example.com"],
-            {"archived": True},
+            {"archived": True, "unread": False},
             BOOKMARKS_SINGLE_RESPONSE,
             json.dumps(BOOKMARKS_SINGLE_RESPONSE),
         ),
@@ -109,7 +113,7 @@ BOOKMARKS_SINGLE_RESPONSE = {
             ["bookmarks", "create", "https://example.com", "-t", "Example"],
             "aiolinkding.bookmark.BookmarkManager.async_create",
             ["https://example.com"],
-            {"archived": False, "title": "Example"},
+            {"archived": False, "title": "Example", "unread": False},
             BOOKMARKS_SINGLE_RESPONSE,
             json.dumps(BOOKMARKS_SINGLE_RESPONSE),
         ),
@@ -129,6 +133,7 @@ BOOKMARKS_SINGLE_RESPONSE = {
                 "archived": False,
                 "description": "A site description",
                 "title": "Example",
+                "unread": False,
             },
             BOOKMARKS_SINGLE_RESPONSE,
             json.dumps(BOOKMARKS_SINGLE_RESPONSE),
@@ -152,6 +157,7 @@ BOOKMARKS_SINGLE_RESPONSE = {
                 "description": "A site description",
                 "tag_names": ["single-tag"],
                 "title": "Example",
+                "unread": False,
             },
             BOOKMARKS_SINGLE_RESPONSE,
             json.dumps(BOOKMARKS_SINGLE_RESPONSE),
@@ -175,7 +181,16 @@ BOOKMARKS_SINGLE_RESPONSE = {
                 "description": "A site description",
                 "tag_names": ["tag1", "tag2", "tag3"],
                 "title": "Example",
+                "unread": False,
             },
+            BOOKMARKS_SINGLE_RESPONSE,
+            json.dumps(BOOKMARKS_SINGLE_RESPONSE),
+        ),
+        (
+            ["bookmarks", "create", "https://example.com", "--unread"],
+            "aiolinkding.bookmark.BookmarkManager.async_create",
+            ["https://example.com"],
+            {"archived": False, "unread": True},
             BOOKMARKS_SINGLE_RESPONSE,
             json.dumps(BOOKMARKS_SINGLE_RESPONSE),
         ),
@@ -207,7 +222,7 @@ BOOKMARKS_SINGLE_RESPONSE = {
             ["bookmarks", "update", "12", "-u", "https://example.com"],
             "aiolinkding.bookmark.BookmarkManager.async_update",
             [12],
-            {"url": "https://example.com"},
+            {"url": "https://example.com", "unread": False},
             BOOKMARKS_SINGLE_RESPONSE,
             json.dumps(BOOKMARKS_SINGLE_RESPONSE),
         ),
@@ -215,7 +230,7 @@ BOOKMARKS_SINGLE_RESPONSE = {
             ["bookmarks", "update", "12", "-t", "Updated Title"],
             "aiolinkding.bookmark.BookmarkManager.async_update",
             [12],
-            {"title": "Updated Title"},
+            {"title": "Updated Title", "unread": False},
             BOOKMARKS_SINGLE_RESPONSE,
             json.dumps(BOOKMARKS_SINGLE_RESPONSE),
         ),
@@ -223,7 +238,15 @@ BOOKMARKS_SINGLE_RESPONSE = {
             ["bookmarks", "update", "12", "--tags", "different-tag1,different-tag2"],
             "aiolinkding.bookmark.BookmarkManager.async_update",
             [12],
-            {"tag_names": ["different-tag1", "different-tag2"]},
+            {"tag_names": ["different-tag1", "different-tag2"], "unread": False},
+            BOOKMARKS_SINGLE_RESPONSE,
+            json.dumps(BOOKMARKS_SINGLE_RESPONSE),
+        ),
+        (
+            ["bookmarks", "update", "12", "--unread"],
+            "aiolinkding.bookmark.BookmarkManager.async_update",
+            [12],
+            {"unread": True},
             BOOKMARKS_SINGLE_RESPONSE,
             json.dumps(BOOKMARKS_SINGLE_RESPONSE),
         ),
@@ -237,12 +260,3 @@ def test_bookmark_command_api_calls(
         result = runner.invoke(APP, args)
         mocked_api_call.assert_awaited_with(*api_coro_args, **api_coro_kwargs)
     assert stdout_output in result.stdout
-
-
-def test_update_no_options(caplog, runner):
-    """Test that attempting to update a bookmark with no options fails."""
-    runner.invoke(APP, ["bookmarks", "update", "12"])
-    assert (
-        "Cannot update a bookmark with passing at least one option."
-        in caplog.messages[0]
-    )
