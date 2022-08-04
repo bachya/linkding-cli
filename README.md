@@ -214,9 +214,11 @@ Options:
   -a, --archived                 Whether the newly-created bookmark should be
                                  immediately archived.
   -d, --description DESCRIPTION  The description to give the bookmark.
+  --shared                       Whether the newly-created bookmark should be
+                                 shareable with other linkding users
   --tags TAG1,TAG2,...           The tags to apply to the bookmark.
   -t, --title TITLE              The title to give the bookmark.
-  -u, --unread                   Whether the newly-created bookmark should be
+  --unread                       Whether the newly-created bookmark should be
                                  marked as unread.
   --help                         Show this message and exit.
   ```
@@ -310,12 +312,14 @@ Arguments:
 Options:
   -u, --url URL                  The URL to assign to the bookmark.
   -d, --description DESCRIPTION  The description to give the bookmark.
+  --shared                       Whether the -created bookmark should be
+                                 shareable with other linkding users
   --tags TAG1,TAG2,...           The tags to apply to the bookmark.
   -t, --title TITLE              The title to give the bookmark.
-  -u, --unread                   Whether the bookmark should be marked as
+  --unread                       Whether the bookmark should be marked as
                                  unread.
   --help                         Show this message and exit.
-  ```
+```
 
 #### Examples:
 

@@ -13,6 +13,7 @@ from linkding_cli.util import generate_api_payload
 CONF_ARCHIVED = "archived"
 CONF_DESCRIPTION = "description"
 CONF_QUERY = "query"
+CONF_SHARED = "shared"
 CONF_TAG_NAMES = "tag_names"
 CONF_TITLE = "title"
 CONF_UNREAD = "unread"
@@ -46,6 +47,14 @@ def create(
         help="The description to give the bookmark.",
         metavar="DESCRIPTION",
     ),
+    shared: bool = typer.Option(
+        False,
+        "--shared",
+        help=(
+            "Whether the newly-created bookmark should be shareable with other "
+            "linkding users"
+        ),
+    ),
     tag_names: str = typer.Option(
         None,
         "--tags",
@@ -75,6 +84,7 @@ def create(
         (
             (CONF_ARCHIVED, archived),
             (CONF_DESCRIPTION, description),
+            (CONF_SHARED, shared),
             (CONF_TAG_NAMES, tags),
             (CONF_TITLE, title),
             (CONF_UNREAD, unread),
@@ -185,6 +195,14 @@ def update(
         help="The description to give the bookmark.",
         metavar="DESCRIPTION",
     ),
+    shared: bool = typer.Option(
+        False,
+        "--shared",
+        help=(
+            "Whether the -created bookmark should be shareable with other linkding "
+            "users"
+        ),
+    ),
     tag_names: str = typer.Option(
         None,
         "--tags",
@@ -213,6 +231,7 @@ def update(
     payload = generate_api_payload(
         (
             (CONF_DESCRIPTION, description),
+            (CONF_SHARED, shared),
             (CONF_TAG_NAMES, tags),
             (CONF_TITLE, title),
             (CONF_UNREAD, unread),
