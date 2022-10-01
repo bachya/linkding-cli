@@ -76,7 +76,7 @@ typer = {extras = ["all"], version = "^0.6.0"}
 nox = "^2022.1.7"
 pre-commit = "^2.0.1"
 pytest = "^7.0.0"
-pytest-cov = "^3.0.0"
+pytest-cov = "^4.0.0"
 
 [tool.poetry.scripts]
 linkding = "linkding_cli.cli:APP"
