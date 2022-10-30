@@ -1,5 +1,6 @@
 """Define tests for configuration."""
 import logging
+from unittest.mock import Mock
 
 import pytest
 from typer.testing import CliRunner
@@ -13,8 +14,14 @@ from .common import TEST_RAW_JSON, TEST_RAW_YAML, TEST_TOKEN, TEST_URL
 
 @pytest.mark.parametrize("runner", [CliRunner()])
 @pytest.mark.parametrize("config", [TEST_RAW_JSON, TEST_RAW_YAML])
-def test_config_file(caplog, config_filepath, runner):
-    """Test successfully loading a valid config file."""
+def test_config_file(caplog: Mock, config_filepath: str, runner: CliRunner) -> None:
+    """Test successfully loading a valid config file.
+
+    Args:
+        caplog: A mock logging utility.
+        config_filepath: A path to a config file.
+        runner: A Typer CliRunner object
+    """
     caplog.set_level(logging.DEBUG)
     runner.invoke(APP, ["-v", "-c", config_filepath, "bookmarks"])
     assert (
@@ -27,15 +34,31 @@ def test_config_file(caplog, config_filepath, runner):
 
 @pytest.mark.parametrize("runner", [CliRunner()])
 @pytest.mark.parametrize("config", ["{}"])
-def test_config_file_empty(caplog, config_filepath, runner):
-    """Test an empty config file with no overrides."""
+def test_config_file_empty(
+    caplog: Mock, config_filepath: str, runner: CliRunner
+) -> None:
+    """Test an empty config file with no overrides.
+
+    Args:
+        caplog: A mock logging utility.
+        config_filepath: A path to a config file.
+        runner: A Typer CliRunner object
+    """
     runner.invoke(APP, ["-c", config_filepath, "bookmarks"])
     assert "Missing required option: --token" in caplog.messages[0]
 
 
 @pytest.mark.parametrize("runner", [CliRunner()])
-def test_config_file_overrides_cli(caplog, config_filepath, runner):
-    """Test a config file with CLI option overrides."""
+def test_config_file_overrides_cli(
+    caplog: Mock, config_filepath: str, runner: CliRunner
+) -> None:
+    """Test a config file with CLI option overrides.
+
+    Args:
+        caplog: A mock logging utility.
+        config_filepath: A path to a config file.
+        runner: A Typer CliRunner object
+    """
     caplog.set_level(logging.DEBUG)
     runner.invoke(APP, ["-v", "-c", config_filepath, "-t", "TEST_TOKEN", "bookmarks"])
     assert any(
@@ -53,8 +76,16 @@ def test_config_file_overrides_cli(caplog, config_filepath, runner):
 
 
 @pytest.mark.parametrize("runner", [CliRunner(env={ENV_TOKEN: "TEST_TOKEN"})])
-def test_config_file_overrides_env_vars(caplog, config_filepath, runner):
-    """Test a config file with environment variable overrides."""
+def test_config_file_overrides_env_vars(
+    caplog: Mock, config_filepath: str, runner: CliRunner
+) -> None:
+    """Test a config file with environment variable overrides.
+
+    Args:
+        caplog: A mock logging utility.
+        config_filepath: A path to a config file.
+        runner: A Typer CliRunner object
+    """
     caplog.set_level(logging.DEBUG)
     runner.invoke(APP, ["-v", "-c", config_filepath, "bookmarks"])
     assert (
@@ -64,16 +95,27 @@ def test_config_file_overrides_env_vars(caplog, config_filepath, runner):
 
 @pytest.mark.parametrize("runner", [CliRunner()])
 @pytest.mark.parametrize("config", ["Fake configuration!"])
-def test_config_file_unparsable(caplog, config_filepath, runner):
-    """Test a config file that can't be parsed as JSON or YAML."""
+def test_config_file_unparsable(
+    caplog: Mock, config_filepath: str, runner: CliRunner
+) -> None:
+    """Test a config file that can't be parsed as JSON or YAML.
+
+    Args:
+        caplog: A mock logging utility.
+        config_filepath: A path to a config file.
+        runner: A Typer CliRunner object
+    """
     caplog.set_level(logging.DEBUG)
     runner.invoke(APP, ["-c", config_filepath, "bookmarks"])
     assert "Unable to parse config file" in caplog.messages[3]
 
 
-@pytest.mark.parametrize("args", [[], ["bookmarks"], ["tags"]])
-def test_missing_command(args, runner):
-    """Test a missing command."""
+def test_missing_command(runner: CliRunner) -> None:
+    """Test a missing command.
+
+    Args:
+        runner: A Typer CliRunner object
+    """
     result = runner.invoke(APP, [])
     assert result.exit_code == 2
     assert "Missing command" in result.stdout
@@ -88,16 +130,30 @@ def test_missing_command(args, runner):
         (["-t", TEST_TOKEN, "bookmarks"], CONF_URL),
     ],
 )
-def test_missing_required_cli_options(args, caplog, missing_arg, runner):
-    """Test missing required options when only using the CLI."""
+def test_missing_required_cli_options(
+    args: list[str], caplog: Mock, missing_arg: str, runner: CliRunner
+) -> None:
+    """Test missing required options when only using the CLI.
+
+    Args:
+        args: A list of CLI arguments
+        caplog: A mock logging utility.
+        missing_arg: A single missing argument.
+        runner: A Typer CliRunner object
+    """
     runner.invoke(APP, args)
     assert "Missing required option" in caplog.messages[0]
     for arg in missing_arg:
         assert arg in caplog.messages[0]
 
 
-def test_startup_logging(caplog, runner):
-    """Test startup logging at various levels."""
+def test_startup_logging(caplog: Mock, runner: CliRunner) -> None:
+    """Test startup logging at various levels.
+
+    Args:
+        caplog: A mock logging utility.
+        runner: A Typer CliRunner object
+    """
     caplog.set_level(logging.INFO)
     runner.invoke(APP, ["bookmarks"])
     info_log_messages = caplog.messages
@@ -110,8 +166,12 @@ def test_startup_logging(caplog, runner):
     assert len(debug_log_messages) > len(info_log_messages)
 
 
-def test_typer_logging_handler(caplog, runner):
-    """Test the TyperLoggerHandler helper."""
+def test_typer_logging_handler(caplog: Mock) -> None:
+    """Test the TyperLoggerHandler helper.
+
+    Args:
+        caplog: A mock logging utility.
+    """
     caplog.set_level(logging.DEBUG)
 
     handler = TyperLoggerHandler()
@@ -128,8 +188,13 @@ def test_typer_logging_handler(caplog, runner):
 
 
 @pytest.mark.parametrize("runner", [CliRunner()])
-def test_url_and_token_via_arguments(caplog, runner):
-    """Test passing linkding URL and token via explicit CLI arguments."""
+def test_url_and_token_via_arguments(caplog: Mock, runner: CliRunner) -> None:
+    """Test passing linkding URL and token via explicit CLI arguments.
+
+    Args:
+        caplog: A mock logging utility.
+        runner: A Typer CliRunner object
+    """
     caplog.set_level(logging.DEBUG)
     runner.invoke(APP, ["-v", "-u", TEST_URL, "-t", TEST_TOKEN, "bookmarks"])
     assert (
@@ -137,8 +202,13 @@ def test_url_and_token_via_arguments(caplog, runner):
     )
 
 
-def test_url_and_token_via_env_vars(caplog, runner):
-    """Test passing linkding URL and token via environment variables."""
+def test_url_and_token_via_env_vars(caplog: Mock, runner: CliRunner) -> None:
+    """Test passing linkding URL and token via environment variables.
+
+    Args:
+        caplog: A mock logging utility.
+        runner: A Typer CliRunner object
+    """
     caplog.set_level(logging.DEBUG)
     runner.invoke(APP, ["-v", "bookmarks"])
     assert (
@@ -146,16 +216,15 @@ def test_url_and_token_via_env_vars(caplog, runner):
     )
 
 
-@pytest.mark.parametrize(
-    "args",
-    [
-        ["bookmarks"],
-        ["bookmarks", "all"],
-        ["tags", "all"],
-    ],
-)
-def test_verbose_logging(args, caplog, runner):
-    """Test verbose logging."""
+@pytest.mark.parametrize("args", [["bookmarks"], ["bookmarks", "all"], ["tags", "all"]])
+def test_verbose_logging(args: list[str], caplog: Mock, runner: CliRunner) -> None:
+    """Test verbose logging.
+
+    Args:
+        args: A list of CLI arguments
+        caplog: A mock logging utility.
+        runner: A Typer CliRunner object
+    """
     caplog.set_level(logging.INFO)
     runner.invoke(APP, args)
     info_log_messages = caplog.messages

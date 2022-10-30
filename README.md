@@ -14,31 +14,31 @@
 - [Installation](#installation)
 - [Python Versions](#python-versions)
 - [Usage](#usage)
-  * [Main Help](#main-help)
-  * [Configuration](#configuration)
-    + [Example: CLI Options](#example--cli-options)
-    + [Example: Environment Variables](#example--environment-variables)
-    + [Example: Configuration File](#example--configuration-file)
-    + [Merging Configuration Options](#merging-configuration-options)
-  * [Bookmarks](#bookmarks)
-    + [The `bookmarks all` command](#the-bookmarks-all-command)
-    + [The `bookmarks archive` command](#the-bookmarks-archive-command)
-    + [The `bookmarks create` command](#the-bookmarks-create-command)
-    + [The `bookmarks delete` command](#the-bookmarks-delete-command)
-    + [The `bookmarks get` command](#the-bookmarks-get-command)
-    + [The `bookmarks unarchive` command](#the-bookmarks-unarchive-command)
-    + [The `bookmarks update` command](#the-bookmarks-update-command)
-  * [Tags](#tags)
-    + [The `tags all` command](#the-tags-all-command)
-    + [The `tags create` command](#the-tags-create-command)
-    + [The `tags get` command](#the-tags-get-command)
-  * [Misc.](#misc)
-    + [Parsing and Pretty Printing Data](#parsing-and-pretty-printing-data)
+  - [Main Help](#main-help)
+  - [Configuration](#configuration)
+    - [Example: CLI Options](#example--cli-options)
+    - [Example: Environment Variables](#example--environment-variables)
+    - [Example: Configuration File](#example--configuration-file)
+    - [Merging Configuration Options](#merging-configuration-options)
+  - [Bookmarks](#bookmarks)
+    - [The `bookmarks all` command](#the-bookmarks-all-command)
+    - [The `bookmarks archive` command](#the-bookmarks-archive-command)
+    - [The `bookmarks create` command](#the-bookmarks-create-command)
+    - [The `bookmarks delete` command](#the-bookmarks-delete-command)
+    - [The `bookmarks get` command](#the-bookmarks-get-command)
+    - [The `bookmarks unarchive` command](#the-bookmarks-unarchive-command)
+    - [The `bookmarks update` command](#the-bookmarks-update-command)
+  - [Tags](#tags)
+    - [The `tags all` command](#the-tags-all-command)
+    - [The `tags create` command](#the-tags-create-command)
+    - [The `tags get` command](#the-tags-get-command)
+  - [Misc.](#misc)
+    - [Parsing and Pretty Printing Data](#parsing-and-pretty-printing-data)
 - [Contributing](#contributing)
 
 # Installation
 
-```python
+```bash
 pip install linkding-cli
 ```
 
@@ -46,9 +46,9 @@ pip install linkding-cli
 
 `linkding-cli` is currently supported on:
 
-* Python 3.9
-* Python 3.10
-* Python 3.11
+- Python 3.9
+- Python 3.10
+- Python 3.11
 
 # Usage
 
@@ -73,15 +73,15 @@ Options:
 Commands:
   bookmarks  Work with bookmarks.
   tags       Work with tags.
-  ```
+```
 
 ## Configuration
 
 Configuration can be provided via a variety of sources:
 
-* CLI Options
-* Environment Variables
-* Configuration File
+- CLI Options
+- Environment Variables
+- Configuration File
 
 ### Example: CLI Options
 
@@ -152,7 +152,7 @@ Commands:
   get        Get a bookmark by its linkding ID.
   unarchive  Unarchive a bookmark by its linkding ID.
   update     Update a bookmark by its linkding ID.
-  ```
+```
 
 ### The `bookmarks all` command
 
@@ -167,7 +167,7 @@ Options:
   -o, --offset INTEGER  The index from which to return results.
   -q, --query TEXT      Return bookmarks containing a query string.
   --help                Show this message and exit.
-  ```
+```
 
 #### Examples:
 
@@ -191,7 +191,7 @@ Arguments:
 
 Options:
   --help  Show this message and exit.
-  ```
+```
 
 #### Examples:
 
@@ -221,7 +221,7 @@ Options:
   --unread                       Whether the newly-created bookmark should be
                                  marked as unread.
   --help                         Show this message and exit.
-  ```
+```
 
 #### Examples:
 
@@ -248,7 +248,7 @@ Arguments:
 
 Options:
   --help  Show this message and exit.
-  ```
+```
 
 #### Examples:
 
@@ -269,7 +269,7 @@ Arguments:
 
 Options:
   --help  Show this message and exit.
-  ```
+```
 
 #### Examples:
 
@@ -290,7 +290,7 @@ Arguments:
 
 Options:
   --help  Show this message and exit.
-  ```
+```
 
 #### Examples:
 
@@ -345,7 +345,7 @@ Commands:
   all     Get all tags.
   create  Create a tag.
   get     Get a tag by its linkding ID.
-  ```
+```
 
 ### The `tags all` command
 
@@ -358,7 +358,7 @@ Options:
   -l, --limit INTEGER   The number of tags to return.
   -o, --offset INTEGER  The index from which to return results.
   --help                Show this message and exit.
-  ```
+```
 
 #### Examples:
 
@@ -379,7 +379,7 @@ Arguments:
 
 Options:
   --help  Show this message and exit.
-  ```
+```
 
 #### Examples:
 
@@ -400,7 +400,7 @@ Arguments:
 
 Options:
   --help  Show this message and exit.
-  ```
+```
 
 #### Examples:
 
@@ -452,7 +452,7 @@ $ linkding bookmarks all | jq '.results[0].title'
 # Contributing
 
 1. [Check for open features/bugs](https://github.com/bachya/linkding-cli/issues)
-  or [initiate a discussion on one](https://github.com/bachya/linkding-cli/issues/new).
+   or [initiate a discussion on one](https://github.com/bachya/linkding-cli/issues/new).
 2. [Fork the repository](https://github.com/bachya/linkding-cli/fork).
 3. (_optional, but highly recommended_) Create a virtual environment: `python3 -m venv .venv`
 4. (_optional, but highly recommended_) Enter the virtual environment: `source ./.venv/bin/activate`

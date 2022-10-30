@@ -25,7 +25,12 @@ def archive(
     ctx: typer.Context,
     bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to archive."),
 ) -> None:
-    """Archive a bookmark by its linkding ID."""
+    """Archive a bookmark by its linkding ID.
+
+    Args:
+        ctx: A Typer Context object.
+        bookmark_id: The ID of the bookmark to archive.
+    """
     asyncio.run(ctx.obj.client.bookmarks.async_archive(bookmark_id))
     typer.echo(f"Bookmark {bookmark_id} archived.")
 
@@ -51,8 +56,7 @@ def create(
         False,
         "--shared",
         help=(
-            "Whether the newly-created bookmark should be shareable with other "
-            "linkding users"
+            "Whether the newly-created bookmark should be shareable with other users"
         ),
     ),
     tag_names: str = typer.Option(
@@ -74,7 +78,18 @@ def create(
         help="Whether the newly-created bookmark should be marked as unread.",
     ),
 ) -> None:
-    """Create a bookmark."""
+    """Create a bookmark.
+
+    Args:
+        ctx: A Typer Context object.
+        url: The URL to bookmark.
+        archived: Whether the newly-created bookmark should be immediately archived.
+        description: The description to give the bookmark.
+        shared: Whether the newly-created bookmark should be shareable with other users.
+        tag_names: The tags to apply to the bookmark.
+        title: The title to give the bookmark.
+        unread: Whether to mark the bookmark as unread.
+    """
     if tag_names:
         tags = tag_names.split(",")
     else:
@@ -100,7 +115,12 @@ def delete(
     ctx: typer.Context,
     bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to delete."),
 ) -> None:
-    """Delete a bookmark by its linkding ID."""
+    """Delete a bookmark by its linkding ID.
+
+    Args:
+        ctx: A Typer Context object.
+        bookmark_id: The ID of the bookmark to delete.
+    """
     asyncio.run(ctx.obj.client.bookmarks.async_delete(bookmark_id))
     typer.echo(f"Bookmark {bookmark_id} deleted.")
 
@@ -134,7 +154,15 @@ def get_all(
         metavar="QUERY",
     ),
 ) -> None:
-    """Get all bookmarks."""
+    """Get all bookmarks.
+
+    Args:
+        ctx: A Typer Context object.
+        archived: Return archived bokomarks.
+        limit: The number of bookmarks to return.
+        offset: The index from which to return results.
+        query: Return bookmarks containing a query string.
+    """
     api_kwargs = generate_api_payload(
         (
             (CONF_LIMIT, limit),
@@ -156,13 +184,18 @@ def get_by_id(
     ctx: typer.Context,
     bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to retrieve."),
 ) -> None:
-    """Get a bookmark by its linkding ID."""
+    """Get a bookmark by its linkding ID.
+
+    Args:
+        ctx: A Typer Context object.
+        bookmark_id: The ID of the bookmark to retrieve.
+    """
     data = asyncio.run(ctx.obj.client.bookmarks.async_get_single(bookmark_id))
     typer.echo(json.dumps(data))
 
 
 @log_exception()
-def main(ctx: typer.Context) -> None:
+def main(_: typer.Context) -> None:
     """Interact with bookmarks."""
     pass
 
@@ -172,7 +205,12 @@ def unarchive(
     ctx: typer.Context,
     bookmark_id: int = typer.Argument(..., help="The ID of a bookmark to archive."),
 ) -> None:
-    """Unarchive a bookmark by its linkding ID."""
+    """Unarchive a bookmark by its linkding ID.
+
+    Args:
+        ctx: A Typer Context object.
+        bookmark_id: The ID of the bookmark to archive.
+    """
     asyncio.run(ctx.obj.client.bookmarks.async_unarchive(bookmark_id))
     typer.echo(f"Bookmark {bookmark_id} unarchived.")
 
@@ -198,10 +236,7 @@ def update(
     shared: bool = typer.Option(
         False,
         "--shared",
-        help=(
-            "Whether the -created bookmark should be shareable with other linkding "
-            "users"
-        ),
+        help=("Whether the -created bookmark should be shareable with other users"),
     ),
     tag_names: str = typer.Option(
         None,
@@ -222,7 +257,18 @@ def update(
         help="Whether the bookmark should be marked as unread.",
     ),
 ) -> None:
-    """Update a bookmark by its linkding ID."""
+    """Update a bookmark by its linkding ID.
+
+    Args:
+        ctx: A Typer Context object.
+        bookmark_id: The ID of a bookmark to update.
+        url: The URL to bookmark.
+        description: The description to give the bookmark.
+        shared: Whether the newly-created bookmark should be shareable with other users.
+        tag_names: The tags to apply to the bookmark.
+        title: The title to give the bookmark.
+        unread: Whether to mark the bookmark as unread.
+    """
     if tag_names:
         tags = tag_names.split(",")
     else:
