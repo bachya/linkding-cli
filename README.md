@@ -4,7 +4,7 @@
 [![PyPi](https://img.shields.io/pypi/v/linkding-cli.svg)](https://pypi.python.org/pypi/linkding-cli)
 [![Version](https://img.shields.io/pypi/pyversions/linkding-cli.svg)](https://pypi.python.org/pypi/linkding-cli)
 [![License](https://img.shields.io/pypi/l/linkding-cli.svg)](https://github.com/bachya/linkding-cli/blob/main/LICENSE)
-[![Code Coverage](https://codecov.io/gh/bachya/linkding-cli/branch/main/graph/badge.svg)](https://codecov.io/gh/bachya/linkding-cli)
+[![Code Coverage](https://codecov.io/gh/bachya/linkding-cli/branch/dev/graph/badge.svg)](https://codecov.io/gh/bachya/linkding-cli)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f01be3cd230902508636/maintainability)](https://codeclimate.com/github/bachya/linkding-cli/maintainability)
 [![Say Thanks](https://img.shields.io/badge/SayThanks-!-1EAEDB.svg)](https://saythanks.io/to/bachya)
 
