@@ -1,4 +1,6 @@
 """Define common test utilities."""
+from __future__ import annotations
+
 import json
 
 from linkding_cli.const import CONF_TOKEN, CONF_URL, CONF_VERBOSE
