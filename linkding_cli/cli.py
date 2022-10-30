@@ -1,4 +1,7 @@
 """Define the main interface to the CLI."""
+# pylint: disable=unused-argument
+from __future__ import annotations
+
 from pathlib import Path
 
 import typer
@@ -48,7 +51,15 @@ def main(
         help="Increase verbosity of standard output.",
     ),
 ) -> None:
-    """Interact with a linkding instance."""
+    """Interact with a linkding instance.
+
+    Args:
+        ctx: A Typer Context object.
+        config: A path to a config file
+        token: A linkding API token.
+        url: A URL to a linkding instance.
+        verbose: Increase verbosity of standard output.
+    """
     ctx.obj = LinkDing(ctx)
 
 

@@ -5,7 +5,14 @@ from typing import Any
 
 
 def generate_api_payload(param_pairs: tuple) -> dict[str, Any]:
-    """Generate an aiolinkding payload dict from a set of param key/values."""
+    """Generate an aiolinkding payload dict from a set of param key/values.
+
+    Args:
+        param_pairs: A tuple of parameter key/value pairs.
+
+    Returns:
+        An API request payload.
+    """
     payload = {}
 
     for key, value in param_pairs:

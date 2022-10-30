@@ -1,6 +1,4 @@
 #!/bin/sh
 set -e
 
-REPO_PATH="$( dirname "$( cd "$(dirname "$0")" ; pwd -P )" )"
-
-(cd "$REPO_PATH"/docs && make html)
+poetry run sphinx-build ./docs ./docs/_build

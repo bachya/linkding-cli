@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import logging
 
-from aiolinkding import Client
 import typer
+from aiolinkding import Client
 
 from linkding_cli.config import Config
 from linkding_cli.const import CONF_VERBOSE
@@ -15,7 +15,11 @@ class LinkDing:  # pylint: disable=too-few-public-methods
     """Define a master linkding manager object."""
 
     def __init__(self, ctx: typer.Context) -> None:
-        """Initialize."""
+        """Initialize.
+
+        Args:
+            ctx: A Typer Context object.
+        """
         if ctx.params[CONF_VERBOSE]:
             log_level = logging.DEBUG
         else:
