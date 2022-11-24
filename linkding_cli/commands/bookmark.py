@@ -10,8 +10,8 @@ from linkding_cli.const import CONF_LIMIT, CONF_OFFSET
 from linkding_cli.helpers.logging import log_exception
 from linkding_cli.util import generate_api_payload
 
-CONF_ARCHIVED = "archived"
 CONF_DESCRIPTION = "description"
+CONF_IS_ARCHIVED = "is_archived"
 CONF_QUERY = "query"
 CONF_SHARED = "shared"
 CONF_TAG_NAMES = "tag_names"
@@ -97,8 +97,8 @@ def create(
 
     payload = generate_api_payload(
         (
-            (CONF_ARCHIVED, archived),
             (CONF_DESCRIPTION, description),
+            (CONF_IS_ARCHIVED, archived),
             (CONF_SHARED, shared),
             (CONF_TAG_NAMES, tags),
             (CONF_TITLE, title),
