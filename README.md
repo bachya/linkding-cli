@@ -1,15 +1,13 @@
 # 🔖 linkding-cli: A CLI to interact with a linkding instance
 
-[![CI](https://github.com/bachya/linkding-cli/workflows/CI/badge.svg)](https://github.com/bachya/linkding-cli/actions)
-[![PyPi](https://img.shields.io/pypi/v/linkding-cli.svg)](https://pypi.python.org/pypi/linkding-cli)
-[![Version](https://img.shields.io/pypi/pyversions/linkding-cli.svg)](https://pypi.python.org/pypi/linkding-cli)
-[![License](https://img.shields.io/pypi/l/linkding-cli.svg)](https://github.com/bachya/linkding-cli/blob/main/LICENSE)
-[![Code Coverage](https://codecov.io/gh/bachya/linkding-cli/branch/dev/graph/badge.svg)](https://codecov.io/gh/bachya/linkding-cli)
-[![Maintainability](https://api.codeclimate.com/v1/badges/f01be3cd230902508636/maintainability)](https://codeclimate.com/github/bachya/linkding-cli/maintainability)
-[![Say Thanks](https://img.shields.io/badge/SayThanks-!-1EAEDB.svg)](https://saythanks.io/to/bachya)
+[![CI][ci-badge]][ci]
+[![PyPI][pypi-badge]][pypi]
+[![Version][version-badge]][version]
+[![License][license-badge]][license]
+[![Code Coverage][codecov-badge]][codecov]
+[![Maintainability][maintainability-badge]][maintainability]
 
-`linkding-cli` is a CLI to interact with a
-[linkding](https://github.com/sissbruecker/linkding) instance.
+`linkding-cli` is a CLI to interact with a [linkding][linkding] instance.
 
 - [Installation](#installation)
 - [Python Versions](#python-versions)
@@ -414,8 +412,8 @@ $ linkding tags get 12
 ### Parsing and Pretty Printing Data
 
 `linkding-cli` doesn't have built-in utilities for modifying JSON output in any way.
-Instead, it's recommended to use a tool like [`jq`](https://stedolan.github.io/jq/).
-This allows for multiple new outcomes, like pretty-printing:
+Instead, it's recommended to use a tool like [`jq`][jq]. This allows for multiple new
+outcomes, like pretty-printing:
 
 ```
 $ linkding bookmarks all | jq
@@ -451,15 +449,35 @@ $ linkding bookmarks all | jq '.results[0].title'
 
 # Contributing
 
-1. [Check for open features/bugs](https://github.com/bachya/linkding-cli/issues)
-   or [initiate a discussion on one](https://github.com/bachya/linkding-cli/issues/new).
-2. [Fork the repository](https://github.com/bachya/linkding-cli/fork).
+Thanks to all of [our contributors][contributors] so far!
+
+1. [Check for open features/bugs][issues] or [initiate a discussion on one][new-issue].
+2. [Fork the repository][fork].
 3. (_optional, but highly recommended_) Create a virtual environment: `python3 -m venv .venv`
 4. (_optional, but highly recommended_) Enter the virtual environment: `source ./.venv/bin/activate`
 5. Install the dev environment: `script/setup`
-6. Code your new feature or bug fix.
+6. Code your new feature or bug fix on a new branch.
 7. Write tests that cover your new functionality.
-8. Run tests and ensure 100% code coverage: `nox -rs coverage`
+8. Run tests and ensure 100% code coverage: `poetry run pytest --cov linkding_cli tests`
 9. Update `README.md` with any new documentation.
-10. Add yourself to `AUTHORS.md`.
-11. Submit a pull request!
+10. Submit a pull request!
+
+[ci-badge]: https://github.com/bachya/linkding-cli/workflows/CI/badge.svg
+[ci]: https://github.com/bachya/linkding-cli/actions
+[codecov-badge]: https://codecov.io/gh/bachya/linkding-cli/branch/dev/graph/badge.svg
+[codecov]: https://codecov.io/gh/bachya/linkding-cli
+[contributors]: https://github.com/bachya/linkding-cli/graphs/contributors
+[fork]: https://github.com/bachya/linkding-cli/fork
+[issues]: https://github.com/bachya/linkding-cli/issues
+[jq]: https://stedolan.github.io/jq/
+[license-badge]: https://img.shields.io/pypi/l/linkding-cli.svg
+[license]: https://github.com/bachya/linkding-cli/blob/main/LICENSE
+[linkding]: https://github.com/sissbruecker/linkding
+[maintainability-badge]: https://api.codeclimate.com/v1/badges/f01be3cd230902508636/maintainability
+[maintainability]: https://codeclimate.com/github/bachya/linkding-cli/maintainability
+[new-issue]: https://github.com/bachya/linkding-cli/issues/new
+[new-issue]: https://github.com/bachya/linkding-cli/issues/new
+[pypi-badge]: https://img.shields.io/pypi/v/linkding-cli.svg
+[pypi]: https://pypi.python.org/pypi/linkding-cli
+[version-badge]: https://img.shields.io/pypi/pyversions/linkding-cli.svg
+[version]: https://pypi.python.org/pypi/linkding-cli
