@@ -63,7 +63,7 @@ packages = [
 
 [tool.poetry.dependencies]
 "ruamel.yaml" = "^0.17.21"
-aiolinkding = ">=2022.10.0"
+aiolinkding = ">=2023.01.0"
 python = "^3.9.0"
 typer = {extras = ["all"], version = ">=0.6,<0.8"}
 

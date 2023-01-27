@@ -2,6 +2,7 @@
 # pylint: disable=unused-argument
 from __future__ import annotations
 
+import asyncio
 from pathlib import Path
 
 import typer
@@ -51,16 +52,9 @@ def main(
         help="Increase verbosity of standard output.",
     ),
 ) -> None:
-    """Interact with a linkding instance.
-
-    Args:
-        ctx: A Typer Context object.
-        config: A path to a config file
-        token: A linkding API token.
-        url: A URL to a linkding instance.
-        verbose: Increase verbosity of standard output.
-    """
-    ctx.obj = LinkDing(ctx)
+    """Interact with a linkding instance."""
+    linkding = ctx.obj = LinkDing(ctx)
+    asyncio.run(linkding.async_init())
 
 
 APP = typer.Typer(callback=main)

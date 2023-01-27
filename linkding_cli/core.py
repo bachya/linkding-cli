@@ -4,7 +4,7 @@ from __future__ import annotations
 import logging
 
 import typer
-from aiolinkding import Client
+from aiolinkding import Client, async_get_client
 
 from linkding_cli.config import Config
 from linkding_cli.const import CONF_VERBOSE
@@ -32,5 +32,12 @@ class LinkDing:  # pylint: disable=too-few-public-methods
             handlers=(typer_handler,),
         )
 
+        # We ignore the typing on self.client because (a) it will be assigned in
+        # async_start and (b) this will help us avoid a bunch of type checks down the
+        # line:
+        self.client: Client = None  # type: ignore[assignment]
         self.config = Config(ctx)
-        self.client = Client(self.config.url, self.config.token)
+
+    async def async_init(self) -> None:
+        """Perform some post instantiation init."""
+        self.client = await async_get_client(self.config.url, self.config.token)
