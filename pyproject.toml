@@ -65,7 +65,7 @@ packages = [
 "ruamel.yaml" = "^0.17.21"
 aiolinkding = ">=2022.10.0"
 python = "^3.9.0"
-typer = {extras = ["all"], version = ">=0.6,<0.8"}
+typer = {extras = ["all"], version = ">=0.6,<0.10"}
 
 [tool.poetry.group.dev.dependencies]
 bandit = "^1.7.4"
