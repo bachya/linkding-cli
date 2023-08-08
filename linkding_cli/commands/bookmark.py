@@ -18,6 +18,7 @@ CONF_TAG_NAMES = "tag_names"
 CONF_TITLE = "title"
 CONF_UNREAD = "unread"
 CONF_URL = "url"
+CONF_NOTES = "notes"
 
 
 @log_exception()
@@ -52,6 +53,13 @@ def create(
         help="The description to give the bookmark.",
         metavar="DESCRIPTION",
     ),
+    notes: str = typer.Option(
+        None,
+        "--notes",
+        "-n",
+        help="Any Markdown-formatted notes.",
+        metavar="NOTES",
+    ),
     shared: bool = typer.Option(
         False,
         "--shared",
@@ -85,6 +93,7 @@ def create(
         url: The URL to bookmark.
         archived: Whether the newly-created bookmark should be immediately archived.
         description: The description to give the bookmark.
+        notes: Any Markdown-formatted notes.
         shared: Whether the newly-created bookmark should be shareable with other users.
         tag_names: The tags to apply to the bookmark.
         title: The title to give the bookmark.
@@ -99,6 +108,7 @@ def create(
         (
             (CONF_DESCRIPTION, description),
             (CONF_IS_ARCHIVED, archived),
+            (CONF_NOTES, notes),
             (CONF_SHARED, shared),
             (CONF_TAG_NAMES, tags),
             (CONF_TITLE, title),
@@ -233,6 +243,13 @@ def update(
         help="The description to give the bookmark.",
         metavar="DESCRIPTION",
     ),
+    notes: str = typer.Option(
+        None,
+        "--notes",
+        "-n",
+        help="Any Markdown-formatted notes.",
+        metavar="NOTES",
+    ),
     shared: bool = typer.Option(
         False,
         "--shared",
@@ -264,6 +281,7 @@ def update(
         bookmark_id: The ID of a bookmark to update.
         url: The URL to bookmark.
         description: The description to give the bookmark.
+        notes: Any Markdown-formatted notes.
         shared: Whether the newly-created bookmark should be shareable with other users.
         tag_names: The tags to apply to the bookmark.
         title: The title to give the bookmark.
@@ -277,6 +295,7 @@ def update(
     payload = generate_api_payload(
         (
             (CONF_DESCRIPTION, description),
+            (CONF_NOTES, notes),
             (CONF_SHARED, shared),
             (CONF_TAG_NAMES, tags),
             (CONF_TITLE, title),
