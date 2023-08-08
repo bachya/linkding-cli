@@ -212,6 +212,7 @@ Options:
   -a, --archived                 Whether the newly-created bookmark should be
                                  immediately archived.
   -d, --description DESCRIPTION  The description to give the bookmark.
+  -n, --notes NOTES              Any Markdown-formatted notes to add to the bookmark.
   --shared                       Whether the newly-created bookmark should be
                                  shareable with other linkding users
   --tags TAG1,TAG2,...           The tags to apply to the bookmark.
@@ -310,6 +311,7 @@ Arguments:
 Options:
   -u, --url URL                  The URL to assign to the bookmark.
   -d, --description DESCRIPTION  The description to give the bookmark.
+  -n, --notes NOTES              Any Markdown-formatted notes to add to the bookmark.
   --shared                       Whether the -created bookmark should be
                                  shareable with other linkding users
   --tags TAG1,TAG2,...           The tags to apply to the bookmark.

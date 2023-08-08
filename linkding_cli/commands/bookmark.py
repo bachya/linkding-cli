@@ -57,7 +57,7 @@ def create(
         None,
         "--notes",
         "-n",
-        help="Any Markdown-formatted notes.",
+        help="Any Markdown-formatted notes to add to the bookmark.",
         metavar="NOTES",
     ),
     shared: bool = typer.Option(
@@ -93,7 +93,7 @@ def create(
         url: The URL to bookmark.
         archived: Whether the newly-created bookmark should be immediately archived.
         description: The description to give the bookmark.
-        notes: Any Markdown-formatted notes.
+        notes: Any Markdown-formatted notes to add to the bookmark.
         shared: Whether the newly-created bookmark should be shareable with other users.
         tag_names: The tags to apply to the bookmark.
         title: The title to give the bookmark.
@@ -247,7 +247,7 @@ def update(
         None,
         "--notes",
         "-n",
-        help="Any Markdown-formatted notes.",
+        help="Any Markdown-formatted notes to add to the bookmark.",
         metavar="NOTES",
     ),
     shared: bool = typer.Option(
@@ -281,7 +281,7 @@ def update(
         bookmark_id: The ID of a bookmark to update.
         url: The URL to bookmark.
         description: The description to give the bookmark.
-        notes: Any Markdown-formatted notes.
+        notes: Any Markdown-formatted notes to add to the bookmark.
         shared: Whether the newly-created bookmark should be shareable with other users.
         tag_names: The tags to apply to the bookmark.
         title: The title to give the bookmark.
