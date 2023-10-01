@@ -8,6 +8,7 @@ import typer
 
 from linkding_cli.commands.bookmark import BOOKMARK_APP
 from linkding_cli.commands.tag import TAG_APP
+from linkding_cli.commands.user import USER_APP
 from linkding_cli.const import ENV_CONFIG, ENV_TOKEN, ENV_URL
 from linkding_cli.core import LinkDing
 from linkding_cli.helpers.logging import log_exception
@@ -66,3 +67,4 @@ def main(
 APP = typer.Typer(callback=main)
 APP.add_typer(BOOKMARK_APP, name="bookmarks", help="Work with bookmarks.")
 APP.add_typer(TAG_APP, name="tags", help="Work with tags.")
+APP.add_typer(USER_APP, name="user", help="Work with user info.")
