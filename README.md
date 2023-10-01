@@ -30,6 +30,8 @@
     - [The `tags all` command](#the-tags-all-command)
     - [The `tags create` command](#the-tags-create-command)
     - [The `tags get` command](#the-tags-get-command)
+  - [User Info](#user-info)
+    - [The `user profile` command](#the-user-profile-command)
   - [Misc.](#misc)
     - [Parsing and Pretty Printing Data](#parsing-and-pretty-printing-data)
 - [Contributing](#contributing)
@@ -447,6 +449,37 @@ $ linkding bookmarks all | jq
 ```
 $ linkding bookmarks all | jq '.results[0].title'
 "Example title"
+```
+
+## User Info
+
+```
+Usage: linkding user [OPTIONS] COMMAND [ARGS]...
+
+  Work with user info.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  profile     Get user profile info.
+```
+
+### The `user profile` command
+
+```
+Usage: linkding user profile [OPTIONS]
+
+  Get user profile info.
+
+Options:
+  --help                Show this message and exit.
+```
+
+#### Examples:
+
+```sh
+$ linkding user profile
 ```
 
 # Contributing
