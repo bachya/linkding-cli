@@ -51,9 +51,9 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
@@ -63,13 +63,15 @@ packages = [
 
 [tool.poetry.dependencies]
 "ruamel.yaml" = ">=0.17.21,<0.19.0"
+aiohttp = ">=3.9.0"
 aiolinkding = ">=2023.10.0"
-python = "^3.9.0"
+frozenlist = "^1.4.0"
+python = ">=3.10,<=3.12"
+shellingham = ">=1.5.4"
 typer = {extras = ["all"], version = ">=0.6,<0.10"}
+yarl = ">=1.9.2"
 
 [tool.poetry.group.dev.dependencies]
-bandit = "^1.7.4"
-black = ">=22.10,<24.0"
 blacken-docs = "^1.12.1"
 codespell = "^2.2.2"
 coverage = {version = ">=6.5,<8.0", extras = ["toml"]}
@@ -82,6 +84,7 @@ pylint = ">=2.15.5,<4.0.0"
 pytest = "^7.2.0"
 pytest-cov = "^4.0.0"
 pyupgrade = "^3.1.0"
+pyyaml = "^6.0.1"
 ruff = ">=0.0.261,<0.1.7"
 safety = "^2.3.1"
 vulture = "^2.6"
