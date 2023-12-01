@@ -98,19 +98,21 @@ speedups = ["Brotli", "aiodns", "brotlicffi"]
 
 [[package]]
 name = "aiolinkding"
-version = "2023.10.0"
+version = "2023.11.0"
 description = "A Python3, async interface to the linkding REST API"
 optional = false
-python-versions = ">=3.9.0,<4.0.0"
+python-versions = ">=3.10,<=3.12"
 files = [
-    {file = "aiolinkding-2023.10.0-py3-none-any.whl", hash = "sha256:6892a92532b66aae4142d49d7fa640614e489a2d5ea090dc5e2ba0fadd0fcc5c"},
-    {file = "aiolinkding-2023.10.0.tar.gz", hash = "sha256:2a13a8ed1e367c5339ee27fcdc622adf830f673fe287db72ebed77056f64e65a"},
+    {file = "aiolinkding-2023.11.0-py3-none-any.whl", hash = "sha256:7d19dc87286f60a4626913724bc9a6cb10c1796ebd81986b16f6d38886453ca2"},
+    {file = "aiolinkding-2023.11.0.tar.gz", hash = "sha256:215c6b87c2a075bc0023d0ed5fc6a1bb28460a508bd83d19291cf0d95434deb5"},
 ]
 
 [package.dependencies]
-aiohttp = ">=3.8.0"
+aiohttp = ">=3.9.0"
 certifi = ">=2023.07.22"
+frozenlist = ">=1.4.0,<2.0.0"
 packaging = ">=23.0,<24.0"
+yarl = ">=1.9.2"
 
 [[package]]
 name = "aiosignal"
