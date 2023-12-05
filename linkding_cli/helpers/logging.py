@@ -40,7 +40,8 @@ _CallableThatFailsType = Callable[..., _T]
 
 
 def log_exception(
-    *, exit_code: int = 1
+    *,
+    exit_code: int = 1,
 ) -> Callable[[_CallableThatFailsType], _CallableThatFailsType]:
     """Define a dectorator to handle exceptions via typer output.
 
