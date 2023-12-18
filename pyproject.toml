@@ -65,7 +65,7 @@ packages = [
 aiohttp = ">=3.9.0"
 aiolinkding = ">=2023.10.0"
 frozenlist = "^1.4.0"
-python = ">=3.10,<=3.12"
+python = "^3.10"
 shellingham = ">=1.5.4"
 typer = {extras = ["all"], version = ">=0.6,<0.10"}
 yarl = ">=1.9.2"
