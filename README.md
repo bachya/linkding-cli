@@ -497,7 +497,7 @@ Thanks to all of [our contributors][contributors] so far!
 9. Update `README.md` with any new documentation.
 10. Submit a pull request!
 
-[ci-badge]: https://github.com/bachya/linkding-cli/workflows/CI/badge.svg
+[ci-badge]: https://img.shields.io/github/actions/workflow/status/bachya/linkding-cli/test.yml
 [ci]: https://github.com/bachya/linkding-cli/actions
 [codecov-badge]: https://codecov.io/gh/bachya/linkding-cli/branch/dev/graph/badge.svg
 [codecov]: https://codecov.io/gh/bachya/linkding-cli
