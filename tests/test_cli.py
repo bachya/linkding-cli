@@ -1,4 +1,5 @@
 """Define tests for configuration."""
+
 from __future__ import annotations
 
 import logging
