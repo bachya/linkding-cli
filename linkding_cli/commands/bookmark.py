@@ -1,4 +1,5 @@
 """Define the bookmark command."""
+
 from __future__ import annotations
 
 import asyncio
