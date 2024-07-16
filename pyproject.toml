@@ -62,6 +62,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
+"ruamel.yaml.clib" = ">=0.2.8"
 aiohttp = ">=3.9.0"
 aiolinkding = ">=2023.10.0"
 frozenlist = "^1.4.0"
