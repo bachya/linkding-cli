@@ -41,7 +41,7 @@ warn_unused_ignores = true
 
 [tool.poetry]
 name = "linkding_cli"
-version = "2024.07.0"
+version = "2024.09.0"
 description = "A CLI to interact with a linkding instance"
 readme = "README.md"
 authors = ["Aaron Bach <bachya1208@gmail.com>"]
