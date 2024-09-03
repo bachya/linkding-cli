@@ -1,5 +1,5 @@
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core==1.9.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
@@ -62,7 +62,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-"ruamel.yaml.clib" = ">=0.2.8"
+"ruamel.yaml" = ">=0.2.8"
 aiohttp = ">=3.9.0"
 aiolinkding = ">=2023.10.0"
 frozenlist = "^1.4.0"
