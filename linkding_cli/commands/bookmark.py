@@ -1,4 +1,5 @@
 """Define the bookmark command."""
+# pylint: disable=too-many-positional-arguments
 
 from __future__ import annotations
 
