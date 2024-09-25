@@ -285,7 +285,7 @@ BOOKMARKS_SINGLE_RESPONSE = {
         ),
     ],
 )
-def test_bookmark_command_api_calls(
+def test_bookmark_command_api_calls(  # pylint: disable=too-many-positional-arguments
     args: list[str],
     api_coro_path: str,
     api_coro_args: list[int | str],
